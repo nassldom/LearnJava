@@ -1,95 +1,57 @@
 Part 1 – Hardware & Software
-
 Kapitel 1 – Was ist ein Computersystem?
+Ein Computersystem besteht aus <b>drei Hauptbausteinen</b>: <b>Hardware</b>, <b>Software</b> und dem <b>Betriebssystem</b>. Zur Hardware gehören alle physischen Teile, die du anfassen kannst: Prozessor (CPU), Arbeitsspeicher (RAM), Festplatte/SSD, Monitor, Tastatur und Maus. Software ist der Oberbegriff für alle Programme, also z.B. Java-Anwendungen, Browser oder Tabellenkalkulationen. Das Betriebssystem (z.B. <i>Windows 11, Linux, macOS</i>) ist der Vermittler zwischen Hardware und Software – es verwaltet den Speicher, steuert Geräte und stellt eine Umgebung bereit, in der Programme gestartet werden können.
 
+Man unterscheidet zwei Arten von Software: <u>Systemsoftware</u> (das Betriebssystem selbst, Gerätetreiber, Dienstprogramme) und <u>Anwendungssoftware</u> (Programme für konkrete Aufgaben wie Textverarbeitung, Lagerverwaltung oder eine selbst geschriebene Java-App). Wenn ein Programm gestartet wird, lädt das Betriebssystem den Programmcode aus dem Massenspeicher in den Arbeitsspeicher und weist dem Prozessor Rechenaufgaben zu.
 
-Ein Computersystem besteht aus drei Hauptbausteinen: Hardware, Software und dem Betriebssystem. Zur Hardware gehören alle physischen Teile, die du anfassen kannst: Prozessor (CPU), Arbeitsspeicher (RAM), Festplatte/SSD, Monitor, Tastatur und Maus. Software ist der Oberbegriff für alle Programme, also z.B. Java-Anwendungen, Browser oder Tabellenkalkulationen. Das Betriebssystem (z.B. Windows 11, Linux, macOS) ist der Vermittler zwischen Hardware und Software – es verwaltet den Speicher, steuert Geräte und stellt eine Umgebung bereit, in der Programme gestartet werden können.
-Man unterscheidet zwei Arten von Software: Systemsoftware (das Betriebssystem selbst, Gerätetreiber, Dienstprogramme) und Anwendungssoftware (Programme für konkrete Aufgaben wie Textverarbeitung, Lagerverwaltung oder eine selbst geschriebene Java-App). Wenn ein Programm gestartet wird, lädt das Betriebssystem den Programmcode aus dem Massenspeicher in den Arbeitsspeicher und weist dem Prozessor Rechenaufgaben zu. Ein-/Ausgabegeräte (Tastatur, Bildschirm, Drucker) ermöglichen die Interaktion zwischen Benutzer und Programm.
-
-Merksätze:
-
-•	Hardware = physische Bauteile, Software = Programme, Betriebssystem = Vermittler.
-
-•	Systemsoftware steuert den Rechner, Anwendungssoftware löst Aufgaben für den Benutzer.
-
-•	Ohne Betriebssystem kann keine Anwendungssoftware laufen.
-
-
-
+<b>Merksätze:</b>
+• <b>Hardware</b> = physische Bauteile, <b>Software</b> = Programme, <b>Betriebssystem</b> = Vermittler.
+• Systemsoftware steuert den Rechner, Anwendungssoftware löst Aufgaben für den Benutzer.
+• Ohne Betriebssystem kann <u>keine</u> Anwendungssoftware laufen.
 Kapitel 2 – Analoge und binäre Signale
+Ein <b>analoges Signal</b> kann jeden beliebigen Wert innerhalb eines Bereichs annehmen, z.B. die Lautstärke einer Stimme als kontinuierliche Schallwelle. Ein <b>digitales Signal</b> kennt dagegen nur zwei Zustände: <b>An oder Aus, 1 oder 0</b>. Genau das macht es ideal für Computer: Elektronische Bauteile (Transistoren) können sehr zuverlässig zwischen zwei Spannungszuständen unterscheiden. Aus diesen zwei Zuständen entsteht das <b>Binärsystem</b> (Zahlensystem zur Basis 2), mit dem Computer intern rechnen und Daten speichern.
 
+Jede Information – Text, Zahlen, Bilder, Töne – wird in Computern als Folge von <b>Bits</b> (0 oder 1) gespeichert. <b>8 Bit = 1 Byte</b>, damit lassen sich 256 verschiedene Werte (0–255) darstellen. Ein Buchstabe wie „A" wird z.B. im ASCII-Standard als Bitmuster <i>01000001</i> = dezimal 65 gespeichert.
 
-Ein analoges Signal kann jeden beliebigen Wert innerhalb eines Bereichs annehmen, z.B. die Lautstärke einer Stimme als kontinuierliche Schallwelle. Ein digitales Signal kennt dagegen nur zwei Zustände: An oder Aus, 1 oder 0. Genau das macht es ideal für Computer: Elektronische Bauteile (Transistoren) können sehr zuverlässig zwischen zwei Spannungszuständen unterscheiden. Aus diesen zwei Zuständen entsteht das Binärsystem (Zahlensystem zur Basis 2), mit dem Computer intern rechnen und Daten speichern.
-Jede Information – Text, Zahlen, Bilder, Töne – wird in Computern als Folge von Bits (0 oder 1) gespeichert. 8 Bit = 1 Byte, damit lassen sich 256 verschiedene Werte (0–255) darstellen. Ein Buchstabe wie „A" wird z.B. im ASCII-Standard als Bitmuster 01000001 = dezimal 65 gespeichert. Das Verständnis des Binärsystems ist Grundlage für alle weiteren Themen in der Informatik – von Datentypen über Netzwerke bis zur Datensicherheit.
-
-Merksätze:
-
-•	Analog = stufenlos, digital = nur zwei Zustände (0/1).
-
-•	1 Bit = kleinste Informationseinheit, 8 Bit = 1 Byte.
-
-•	Computer verwenden Binärdarstellung, weil Transistoren zwei stabile Zustände haben.
-
-
-
-
+<b>Merksätze:</b>
+• <b>Analog</b> = stufenlos, <b>digital</b> = nur zwei Zustände (0/1).
+• 1 Bit = kleinste Informationseinheit, <b>8 Bit = 1 Byte</b>.
+• Computer verwenden Binärdarstellung, weil Transistoren zwei stabile Zustände haben.
 Kapitel 3 – Arbeitsspeicher und Speicherarten
+Computer haben verschiedene Arten von Speicher, die sich in <b>Geschwindigkeit</b>, <b>Größe</b> und <b>Flüchtigkeit</b> unterscheiden:
 
+• <b>Arbeitsspeicher (RAM</b> – Random Access Memory<b>)</b>: <i>Schneller, aber flüchtiger</i> Speicher. Hier werden laufende Programme und deren Daten gehalten. Wenn der Strom aus ist, gehen alle Inhalte verloren.
+• <b>Massenspeicher (Festplatte/SSD)</b>: <i>Langsamer, aber dauerhaft</i>. Hier bleiben Dateien, Programme und das Betriebssystem auch ohne Strom erhalten.
+• <b>Cache</b>: Sehr kleiner, extrem schneller Speicher direkt im Prozessor. Hält häufig genutzte Daten bereit, damit die CPU nicht ständig auf das langsamere RAM warten muss.
 
-Computer haben verschiedene Arten von Speicher, die sich in Geschwindigkeit, Größe und Flüchtigkeit unterscheiden:
+<b>Speichereinheiten:</b>
+• 1 Bit – kleinste Einheit (0 oder 1)
+• 1 Byte – 8 Bit
+• 1 Kilobyte (KB) – 1.024 Byte
+• 1 Megabyte (MB) – 1.024 KB
+• 1 Gigabyte (GB) – 1.024 MB
+• 1 Terabyte (TB) – 1.024 GB
 
-•	Arbeitsspeicher (RAM – Random Access Memory): Schneller, aber flüchtiger Speicher. Hier werden laufende Programme und deren Daten gehalten. Wenn 
-der Strom aus ist, gehen alle Inhalte verloren.
-
-•	Massenspeicher (Festplatte/SSD): Langsamer, aber dauerhaft. Hier bleiben Dateien, Programme und das Betriebssystem auch ohne Strom erhalten.
-
-•	Cache: Sehr kleiner, extrem schneller Speicher direkt im Prozessor. Hält häufig genutzte Daten bereit, damit die CPU nicht ständig auf das langsamere RAM warten muss.
-
-Speichereinheiten:
-Einheit			Größe
-1 Bit			kleinste Einheit (0 oder 1)
-1 Byte			8 Bit
-1 Kilobyte (KB)		1.024 Byte
-1 Megabyte (MB)		1.024 KB
-1 Gigabyte (GB)		1.024 MB
-1 Terabyte (TB)		1.024 GB
-
-Merksätze:
-
-•	RAM ist flüchtig (Daten weg bei Stromausfall), Massenspeicher ist dauerhaft.
-
-•	Je näher der Speicher am Prozessor, desto schneller – aber auch teurer und kleiner.
-
-•	Java-Programme und ihre Variablen liegen zur Laufzeit im RAM.
-
-
-
+<b>Merksätze:</b>
+• RAM ist <u>flüchtig</u> (Daten weg bei Stromausfall), Massenspeicher ist <u>dauerhaft</u>.
+• Je näher der Speicher am Prozessor, desto schneller – aber auch teurer und kleiner.
+• <i>Java-Programme und ihre Variablen liegen zur Laufzeit im RAM.</i>
 Kapitel 4 – Der Prozessor (CPU)
+Die <b>CPU</b> (Central Processing Unit) ist das „Gehirn" des Computers. Sie führt Programmbefehle aus, steuert den Datenfluss und koordiniert alle anderen Komponenten. Wichtige Bestandteile der CPU:
 
-Die CPU (Central Processing Unit) ist das „Gehirn" des Computers. Sie führt Programmbefehle aus, steuert den Datenfluss und koordiniert alle anderen Komponenten. Wichtige Bestandteile der CPU sind:
-
-•	ALU (Arithmetic Logic Unit): Führt Rechenoperationen (z.B. Addition) und Vergleiche durch.
-
-•	Steuerwerk (Control Unit): Holt Befehle aus dem Speicher, dekodiert sie und koordiniert die Ausführung.
-
-•	Register: Sehr schnelle, winzige Zwischenspeicher direkt in der CPU (z.B. für aktuelle Rechenergebnisse).
-
-•	Taktgeber: Gibt den Rhythmus vor – z.B. 3 GHz = 3 Milliarden Taktschritte pro Sekunde.
+• <b>ALU</b> (Arithmetic Logic Unit): Führt Rechenoperationen (z.B. Addition) und Vergleiche durch.
+• <b>Steuerwerk</b> (Control Unit): Holt Befehle aus dem Speicher, dekodiert sie und koordiniert die Ausführung.
+• <b>Register</b>: Sehr schnelle, winzige Zwischenspeicher direkt in der CPU (z.B. für aktuelle Rechenergebnisse).
+• <b>Taktgeber</b>: Gibt den Rhythmus vor – z.B. <i>3 GHz = 3 Milliarden Taktschritte pro Sekunde</i>.
 
 Jeder Befehl durchläuft einen festen Zyklus:
-1.	Holen (Fetch): Der nächste Befehl wird aus dem RAM in die CPU geladen.
-2.	Dekodieren (Decode): Die CPU versteht, was zu tun ist (z.B. „addiere zwei Zahlen").
-3.	Ausführen (Execute): Die Operation wird durchgeführt, das Ergebnis gespeichert.
+<b>1. Holen (Fetch):</b> Der nächste Befehl wird aus dem RAM in die CPU geladen.
+<b>2. Dekodieren (Decode):</b> Die CPU versteht, was zu tun ist (z.B. „addiere zwei Zahlen").
+<b>3. Ausführen (Execute):</b> Die Operation wird durchgeführt, das Ergebnis gespeichert.
 
-Dieser Zyklus wiederholt sich Milliarden Mal pro Sekunde – das ergibt ein laufendes Programm.
+<i>Dieser Zyklus wiederholt sich Milliarden Mal pro Sekunde – das ergibt ein laufendes Programm.</i>
 
-Merksätze:
-
-•	CPU = Prozessor: holt, dekodiert und führt Befehle aus.
-
-•	ALU rechnet, Steuerwerk koordiniert, Register speichern Zwischenergebnisse.
-
-•	Die Taktfrequenz (GHz) sagt, wie viele Zyklen pro Sekunde möglich sind.
-
-
-
+<b>Merksätze:</b>
+• CPU = Prozessor: <u>holt, dekodiert und führt Befehle aus</u>.
+• ALU rechnet, Steuerwerk koordiniert, Register speichern Zwischenergebnisse.
+• Die Taktfrequenz (GHz) sagt, wie viele Zyklen pro Sekunde möglich sind.
