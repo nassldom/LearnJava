@@ -56,7 +56,7 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginStart="12dp"
-            android:src="@drawable/java_logo"
+                    android:visibility="gone"
             android:scaleType="fitCenter"
             android:contentDescription="Java Logo" />
 
