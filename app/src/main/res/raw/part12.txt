@@ -1,0 +1,59 @@
+PART 12 – Sortieralgorithmen
+(Kap. 110–112)
+
+Selection Sort:
+• Suche kleinstes Element im unsortierten Teil
+• Tausche mit erstem unsortierten Element
+• Wiederhole bis alles sortiert
+• Laufzeit: O(n²)
+[CODE]
+for (int i = 0; i < array.length - 1; i++) {
+    int minIndex = i;
+    for (int j = i + 1; j < array.length; j++) {
+        if (array[j] < array[minIndex]) {
+            minIndex = j;
+        }
+    }
+    // Tausch
+    int temp       = array[minIndex];
+    array[minIndex] = array[i];
+    array[i]       = temp;
+}
+[/CODE]
+
+Insertion Sort:
+• Nimm nächstes Element, füge an richtiger Stelle ein
+• Wie Karten sortieren in der Hand
+• Laufzeit: O(n²), gut bei fast sortierten Daten
+[CODE]
+for (int i = 1; i < array.length; i++) {
+    int key = array[i];
+    int j   = i - 1;
+    while (j >= 0 && array[j] > key) {
+        array[j + 1] = array[j];
+        j--;
+    }
+    array[j + 1] = key;
+}
+[/CODE]
+
+Arrays.sort() – eingebaut (empfohlen!):
+[CODE]
+import java.util.Arrays;
+int[] zahlen = {5, 2, 8, 1};
+Arrays.sort(zahlen); // → {1, 2, 5, 8}
+
+String[] namen = {"Zara", "Anna", "Max"};
+Arrays.sort(namen); // → alphabetisch
+
+// Objekte sortieren (Comparable nötig):
+Arrays.sort(buecher);
+[/CODE]
+
+Merksatz:
+• Selection/Insertion Sort: O(n²) – für Lernzwecke
+• Arrays.sort(): O(n log n)  – immer in der Praxis verwenden
+• Strings vergleichen: compareTo() intern genutzt
+
+Dateien: BoxSort.java, InsertionSortTester.java,
+         ArraysTester.java, Book.java

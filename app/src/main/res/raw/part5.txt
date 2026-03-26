@@ -1,0 +1,535 @@
+Kapitel 30 – Zufallszahlen
+
+
+Zufallszahlen werden in vielen Programmen gebraucht: Spiele, Simulationen, Testdaten, Passwortgeneratoren. Java bietet zwei Wege:
+
+•	Math.random() → gibt einen double-Wert zwischen 0.0 (inklusiv) und 1.0 (exklusiv) zurück.
+
+•	new Random() → Objekt der Klasse Random, bietet mehr Kontrolle und verschiedene Datentypen.
+
+Codebeispiel (DieToss.java) – Würfeln mit Math.random():
+
+[CODE]
+public class DieToss {
+    public static void main( String[] args ) {
+        // Zufallszahl von 1 bis 6
+        int wuerfel = (int)(Math.random() * 6) + 1;
+        System.out.println("Gewürfelt: " + wuerfel);
+    }
+}
+[/CODE]
+
+Erklärung zum Code:
+
+Math.random() liefert z.B. 0.734. Multipliziert mit 6 ergibt das 4.404. (int) schneidet die Nachkommastellen ab → 4. Plus 1 ergibt den Würfelwert 5. Die Formel für eine ganze Zufallszahl von min bis max (inklusiv) lautet allgemein:
+
+[CODE]
+int zufall = (int)(Math.random() * (max - min + 1)) + min;
+Codebeispiel (TwoDieToss.java) – zwei Würfel mit Random:
+java
+import java.util.Random;
+
+public class TwoDieToss {
+    public static void main( String[] args ) {
+        Random rand = new Random();
+
+        int wuerfel1 = rand.nextInt(6) + 1; // 1 bis 6
+        int wuerfel2 = rand.nextInt(6) + 1; // 1 bis 6
+        int summe    = wuerfel1 + wuerfel2;
+
+        System.out.println("Würfel 1: " + wuerfel1);
+        System.out.println("Würfel 2: " + wuerfel2);
+        System.out.println("Summe:    " + summe);
+    }
+}
+[/CODE]
+
+Erklärung zum Code:
+
+rand.nextInt(6) liefert eine Zahl von 0 bis 5. Plus 1 verschiebt den Bereich auf 1 bis 6. new Random() erzeugt ein Zufallszahlengenerator-Objekt – bei jedem Programmstart mit anderem Startwert (Seed), sodass die Zahlen wirklich zufällig wirken.
+
+Codebeispiel (PasswordGenerator.java) – Zufälliger Buchstabe:
+
+[CODE]
+import java.util.Random;
+
+public class PasswordGenerator {
+    public static void main( String[] args ) {
+        Random rand     = new Random();
+        String zeichen  = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        int laenge      = 8;
+        StringBuilder passwort = new StringBuilder();
+
+        for ( int i = 0; i < laenge; i++ ) {
+            int index = rand.nextInt(zeichen.length());
+            passwort.append(zeichen.charAt(index));
+        }
+
+        System.out.println("Passwort: " + passwort);
+    }
+}
+[/CODE]
+
+Wichtige Random-Methoden:
+
+Methode		Liefert
+nextInt(n)	ganze Zahl von 0 bis n-1
+nextDouble()	double von 0.0 bis 1.0
+nextBoolean()	zufällig true oder false
+
+Typische Fehler:
+
+•	(int)(Math.random() * 6) → Bereich 0–5, nicht 1–6. + 1 nicht vergessen.
+
+•	Jedes Mal new Random() innerhalb einer Schleife erzeugen → schlechte Praxis, immer einmalig außerhalb erzeugen.
+
+
+
+
+
+
+
+Kapitel 31 – Inkrement-, Dekrement- und Zuweisungsoperatoren
+
+
+In Java gibt es praktische Kurzformen für häufige Operationen auf Variablen. Du kennst bereits i = i + 1 – das lässt sich kürzer schreiben:
+
+Zuweisungsoperatoren:
+
+Kurzform	Langform	Bedeutung
+
+i++		i = i + 1	Inkrement (erhöhen um 1)
+i--		i = i - 1	Dekrement (verringern um 1)
+i += 5		i = i + 5	erhöhen um 5
+i -= 3		i = i - 3	verringern um 3
+i *= 2		i = i * 2	verdoppeln
+i /= 4		i = i / 4	durch 4 teilen
+i %= 3		i = i % 3	Modulo mit 3
+
+Codebeispiel (PrefixTest.java) – Präfix vs. Postfix:
+
+[CODE]
+public class PrefixTest {
+    public static void main( String[] args ) {
+        int a = 5;
+        int b = 5;
+
+        // Postfix: erst Wert verwenden, dann erhöhen
+        System.out.println("Postfix a++: " + a++); // gibt 5 aus, dann a = 6
+        System.out.println("a danach:    " + a);   // 6
+
+        // Präfix: erst erhöhen, dann Wert verwenden
+        System.out.println("Präfix ++b:  " + (++b)); // b = 6, gibt 6 aus
+        System.out.println("b danach:    " + b);     // 6
+    }
+}
+[/CODE]
+
+Ausgabe:
+
+Postfix a++: 5
+a danach:    6
+Präfix ++b:  6
+b danach:    6
+
+Erklärung zum Code:
+
+•	Postfix (i++): Der aktuelle Wert wird zuerst verwendet (z.B. ausgegeben oder zugewiesen), danach wird i um 1 erhöht.
+
+•	Präfix (++i): i wird zuerst um 1 erhöht, dann wird der neue Wert verwendet.
+
+In for-Schleifen wie for (int i = 0; i < 10; i++) spielt der Unterschied keine Rolle, weil das Ergebnis von i++ dort nicht weiterverwendet wird. In Ausdrücken wie int x = i++ aber sehr wohl.
+
+Praxistipp:
+
+In Schleifen fast immer i++ oder i-- verwenden. Präfix (++i) kommt seltener vor, ist aber wichtig zu kennen, weil du es in fremdem Code siehst.
+
+Codebeispiel – Kurzformen in der Praxis:
+
+[CODE]
+int punkte = 100;
+
+punkte += 50;   // Bonus: jetzt 150
+punkte -= 20;   // Abzug: jetzt 130
+punkte *= 2;    // Verdoppelt: jetzt 260
+
+System.out.println("Punkte: " + punkte); // 260
+[/CODE]
+
+Typische Fehler:
+
+•	int x = i++ und int x = ++i verwechseln → unterschiedliche Werte in x.
+
+•	i++ in einer Bedingung: while (i++ < 10) → funktioniert, aber schwer lesbar. Besser trennen.
+
+
+
+
+
+
+
+Kapitel 32 – Boolesche Ausdrücke und Kurzschlussauswertung
+
+
+
+Java wertet logische Ausdrücke von links nach rechts aus und bricht so früh wie möglich ab – das nennt sich Kurzschlussauswertung (Short-Circuit Evaluation):
+
+•	Bei && (UND): Ist die linke Seite bereits false, wird die rechte Seite nicht mehr ausgewertet – das Gesamtergebnis kann sowieso nur false sein.
+
+•	Bei || (ODER): Ist die linke Seite bereits true, wird die rechte Seite nicht mehr ausgewertet – das Gesamtergebnis ist sowieso true.
+
+Das ist nicht nur eine Optimierung, sondern ein wichtiges Sicherheitsmerkmal:
+
+Codebeispiel (OddExpression.java) – sichere Null-Prüfung:
+
+[CODE]
+public class OddExpression {
+    public static void main( String[] args ) {
+        String name = null;
+
+        // SICHER: erst null prüfen, dann Methode aufrufen
+        if ( name != null && name.length() > 0 ) {
+            System.out.println("Name ist gültig: " + name);
+        } else {
+            System.out.println("Name ist leer oder null.");
+        }
+
+        // UNSICHER (NullPointerException wenn name == null):
+        // if ( name.length() > 0 && name != null )
+    }
+}
+[/CODE]
+
+Erklärung zum Code:
+
+Weil name hier null ist, wäre name.length() ein Laufzeitfehler (NullPointerException). Durch die Reihenfolge name != null && name.length() > 0 prüft Java zuerst ob name überhaupt existiert. Ist es null → ergibt name != null den Wert false → Java bricht ab, name.length() wird nie aufgerufen. Das ist ein klassisches Sicherheitsmuster in Java.
+
+Weitere Beispiele:
+
+[CODE]
+int x = 10;
+
+// Short-Circuit bei &&
+if ( x > 0 && (10 / x) > 1 ) {       // x > 0 ist true, also wird 10/x ausgewertet
+    System.out.println("Beide wahr");
+}
+
+// Short-Circuit bei || (Division durch 0 wird vermieden)
+if ( x == 0 || (100 / x) > 5 ) {     // x == 0 ist false, also wird 100/x ausgewertet
+    System.out.println("Mindestens eins wahr");
+}
+[/CODE]
+
+Nicht kurzschließende Operatoren & und |:
+
+Java kennt auch & (einfaches UND) und | (einfaches ODER) – diese werten immer beide Seiten aus, egal was links steht. Sie werden nur in speziellen Fällen (z.B. Bitoperationen) eingesetzt. Für normale Bedingungen immer && und || verwenden.
+
+Merksatz:
+
+&&: Links false → rechts wird übersprungen
+||: Links true  → rechts wird übersprungen
+
+Typische Fehler:
+
+•	Reihenfolge der Teilbedingungen falsch → NullPointerException oder ArithmeticException die hätte vermieden werden können.
+
+•	& statt && verwenden → beide Seiten werden ausgewertet, auch wenn links schon false ist → mögliche Laufzeitfehler.
+
+
+
+
+
+
+Kapitel 33 – Wahrheitstabellen und De-Morgan-Gesetze
+
+
+Wahrheitstabellen zeigen für jede mögliche Kombination von Eingaben, was ein logischer Ausdruck ergibt. Sie sind ein unverzichtbares Werkzeug, um Bedingungen zu analysieren, Fehler zu finden und Logik in Prüfungen zu begründen.
+
+Wahrheitstabelle für && (UND):
+A	B	A && B
+true	true	true
+true	false	false
+false	true	false
+false	false	false
+
+→ Ergebnis ist nur true, wenn beide Seiten true sind.
+
+Wahrheitstabelle für || (ODER):
+A	B	A || B
+true	true	true
+true	false	true
+false	true	true
+false	false	false
+
+→ Ergebnis ist nur false, wenn beide Seiten false sind.
+
+Wahrheitstabelle für ! (NICHT):
+A	!A
+true	false
+false	true
+
+De-Morgan-Gesetze:
+
+Die De-Morgan-Gesetze erlauben es, negierte Bedingungen korrekt umzuformen. Das ist besonders wichtig beim Debuggen von Logikfehlern und beim Lesen fremden Codes:
+
+Original	Umgeformt mit De Morgan
+!(A && B)	!A \|\| !B
+!(A \|\| B)	!A && !B
+
+Merksatz: Beim Negieren einer UND-Verknüpfung wird UND zu ODER – und umgekehrt. Die einzelnen Teilbedingungen werden ebenfalls negiert.
+
+Anschauliches Beispiel:
+
+[CODE]
+boolean mitglied = true;
+boolean bezahlt  = false;
+
+// Original: nicht (Mitglied UND bezahlt)
+if ( !(mitglied && bezahlt) ) {
+    System.out.println("Zugang verweigert.");
+}
+
+// Gleichwertig nach De Morgan: kein Mitglied ODER nicht bezahlt
+if ( !mitglied || !bezahlt ) {
+    System.out.println("Zugang verweigert.");
+}
+// Beide Varianten liefern dasselbe Ergebnis – hier: "Zugang verweigert."
+
+Praktisches Beispiel – Bedingung vereinfachen:
+
+int alter = 20;
+boolean student = true;
+
+// Ursprünglich:
+if ( !(alter >= 65 || student) ) {
+    System.out.println("Kein Rabatt.");
+}
+
+// Nach De Morgan umgeformt (oft leichter lesbar):
+if ( alter < 65 && !student ) {
+    System.out.println("Kein Rabatt.");
+}
+[/CODE]
+
+Warum ist das wichtig?
+
+In der Ausbildung und in Prüfungen wirst du häufig gefragt, ob zwei Bedingungen äquivalent sind oder eine Bedingung zu vereinfachen. De-Morgan-Gesetze sind dafür das wichtigste Werkzeug. Außerdem helfen sie beim Debugging: Wenn eine Bedingung nicht das tut was du erwartest, forme sie mit De Morgan um und prüfe die Logik erneut.
+
+
+
+
+
+
+
+
+Kapitel 34 – Bedingungsoperator und switch-Anweisung
+
+Teil 1 – Der Bedingungsoperator ?:
+
+Der Bedingungsoperator (auch: ternärer Operator) ist eine kompakte Schreibweise für einfache if-else-Entscheidungen direkt innerhalb eines Ausdrucks:
+
+Bedingung ? Wert_wenn_true : Wert_wenn_false
+
+Codebeispiel (ConditionalOperator.java):
+
+[CODE]
+public class ConditionalOperator {
+    public static void main( String[] args ) {
+        int punkte = 75;
+
+        // Klassisches if-else:
+        String ergebnis;
+        if ( punkte >= 50 ) {
+            ergebnis = "Bestanden";
+        } else {
+            ergebnis = "Nicht bestanden";
+        }
+
+        // Kurzform mit ?:
+        String ergebnis2 = (punkte >= 50) ? "Bestanden" : "Nicht bestanden";
+
+        System.out.println(ergebnis);  // Bestanden
+        System.out.println(ergebnis2); // Bestanden
+
+        // Direkt in println:
+        System.out.println("Status: " + (punkte >= 50 ? "OK" : "Fehler"));
+    }
+}
+[/CODE]
+
+Erklärung zum Code:
+
+Beide Varianten liefern dasselbe Ergebnis. Der ?:-Operator eignet sich gut für kurze, klare Entscheidungen. Bei komplexerer Logik ist das klassische if-else immer die bessere Wahl – Lesbarkeit geht vor Kürze.
+
+
+
+Teil 2 – Die switch-Anweisung
+
+switch eignet sich, wenn eine Variable gegen viele mögliche feste Werte geprüft wird – z.B. Wochentage, Menücodes oder Statuswerte. Es ist eine übersichtlichere Alternative zu vielen aufeinanderfolgenden if-else if-Blöcken.
+
+Codebeispiel (SwitchTester.java):
+
+[CODE]
+import java.util.Scanner;
+
+public class SwitchTester {
+    public static void main( String[] args ) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Wochentag (1=Mo, 2=Di, ..., 7=So): ");
+        int tag = scanner.nextInt();
+
+        switch ( tag ) {
+            case 1:
+                System.out.println("Montag");
+                break;
+            case 2:
+                System.out.println("Dienstag");
+                break;
+            case 3:
+                System.out.println("Mittwoch");
+                break;
+            case 4:
+                System.out.println("Donnerstag");
+                break;
+            case 5:
+                System.out.println("Freitag");
+                break;
+            case 6:
+            case 7:
+                System.out.println("Wochenende!");
+                break;
+            default:
+                System.out.println("Ungültige Eingabe.");
+        }
+    }
+}
+[/CODE]
+
+Erklärung zum Code:
+
+•	case X: definiert einen Zweig für den Wert X.
+
+•	break; beendet den switch-Block. Fehlt break, fällt Java in den nächsten case durch (sogenanntes Fall-Through) – das ist meistens ein Fehler, kann aber wie bei case 6 und case 7 gezielt genutzt werden.
+
+•	default: ist der Standardfall, wenn kein case passt – vergleichbar mit else.
+
+Wann switch, wann if-else?
+
+Situation					Empfehlung
+
+Variable gegen viele feste Werte prüfen		switch
+Bereiche prüfen (z.B. > 50)			if-else
+Strings vergleichen (Java 7+)			switch möglich
+Komplexe Bedingungen mit && / \|\|		if-else
+
+Typische Fehler:
+
+•	break vergessen → Fall-Through: mehrere Cases werden ausgeführt, obwohl nur einer gemeint war.
+
+•	default vergessen → ungültige Werte werden still ignoriert.
+
+•	switch mit double → nicht erlaubt, nur int, char, String und Enums.
+
+
+
+
+
+Kapitel 35 – Die do-while-Schleife
+
+
+Die do-while-Schleife ist eine Variante der while-Schleife mit einem entscheidenden Unterschied: Die Bedingung wird am Ende des Schleifenkörpers geprüft, nicht am Anfang. Das bedeutet: Der Schleifenkörper wird mindestens einmal ausgeführt, egal ob die Bedingung wahr oder falsch ist.
+
+Aufbau:
+
+[CODE]
+do {
+    // Schleifenkörper – wird mindestens einmal ausgeführt
+} while ( Bedingung );   // Semikolon am Ende ist Pflicht!
+[/CODE]
+
+Vergleich while vs. do-while:
+
+[CODE]
+// while: wird möglicherweise NIE ausgeführt
+int x = 10;
+while ( x < 5 ) {
+    System.out.println("while läuft"); // wird nicht ausgegeben
+}
+
+// do-while: wird IMMER mindestens einmal ausgeführt
+int y = 10;
+do {
+    System.out.println("do-while läuft"); // wird einmal ausgegeben!
+} while ( y < 5 );
+[/CODE]
+
+Codebeispiel (DoWhileTester.java) – Grundprinzip:
+
+[CODE]
+public class DoWhileTester {
+    public static void main( String[] args ) {
+        int i = 1;
+
+        do {
+            System.out.println("Durchlauf: " + i);
+            i++;
+        } while ( i <= 5 );
+
+        System.out.println("Fertig.");
+    }
+}
+[/CODE]
+
+Ausgabe:
+
+Durchlauf: 1
+Durchlauf: 2
+Durchlauf: 3
+Durchlauf: 4
+Durchlauf: 5
+Fertig.
+
+Klassischer Einsatzfall – Eingabe validieren (DoWhileValidation.java):
+
+[CODE]
+import java.util.Scanner;
+
+public class DoWhileValidation {
+    public static void main( String[] args ) {
+        Scanner scanner = new Scanner(System.in);
+        int eingabe;
+
+        do {
+            System.out.print("Gib eine Zahl zwischen 1 und 10 ein: ");
+            eingabe = scanner.nextInt();
+
+            if ( eingabe < 1 || eingabe > 10 ) {
+                System.out.println("Ungültig! Bitte nochmal.");
+            }
+        } while ( eingabe < 1 || eingabe > 10 );
+
+        System.out.println("Gültige Eingabe: " + eingabe);
+    }
+}
+[/CODE]
+
+Erklärung zum Code:
+
+Das Programm muss den Benutzer mindestens einmal nach einer Zahl fragen – genau das leistet do-while. Solange die Eingabe außerhalb des erlaubten Bereichs liegt, wird die Schleife wiederholt. Wäre eine while-Schleife verwendet worden, müsste die Eingabe vor der Schleife und am Ende des Körpers stehen (Priming Read) – uneleganter.
+
+Die drei Schleifenarten im Vergleich:
+
+Schleife	Bedingung prüfen	Mindestens ein Durchlauf?	Typischer Einsatz
+
+while		vor dem Körper		nein				unbekannte Anzahl, kann 0 sein
+for		vor dem Körper		nein				bekannte Anzahl
+do-while	nach dem Körper		ja, immer			Eingabe-Validierung, Menüs
+
+Typische Fehler:
+
+•	Semikolon nach while(Bedingung) vergessen → Compilerfehler.
+
+•	Aktualisierungsvariable vergessen → Endlosschleife.
+
+•	do-while verwenden, wenn der erste Durchlauf unter Umständen nicht stattfinden soll → dann lieber while.

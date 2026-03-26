@@ -1,0 +1,504 @@
+PART 3 – Daten & Ein-/Ausgabe
+(Kap. 8–15)
+
+Kapitel 8 – Primitive Datentypen
+
+Java kennt acht primitive Datentypen. Die vier wichtigsten für den Einstieg:
+
+Typ		Verwendung			Wertebereich (vereinfacht)
+
+int		Ganze Zahlen			ca. −2,1 Mrd. bis +2,1 Mrd.
+long		Sehr große ganze Zahlen		ca. ±9,2 × 10¹⁸
+double		Gleitkommazahlen		ca. ±1,7 × 10³⁰⁸
+boolean		Wahrheitswert			nur true oder false
+char		Einzelnes Zeichen		z.B. 'A', '3', '!'
+
+Primitive Typen speichern ihren Wert direkt im Speicher – kein Objekt, keine Referenz. Das macht sie schnell und speichersparsam. In Java muss jede Variable einen festen Typ haben, der beim Kompilieren geprüft wird. Das nennt sich statische Typisierung und ist ein wichtiger Unterschied z.B. zu Python.
+Codebeispiel (Variable.java):
+[CODE]
+public class Variable {
+    public static void main( String[] args ) {
+        int alter = 21;
+        double preis = 9.99;
+        boolean istAktiv = true;
+        char buchstabe = 'A';
+
+        System.out.println("Alter: "      + alter);
+        System.out.println("Preis: "      + preis);
+        System.out.println("Aktiv: "      + istAktiv);
+        System.out.println("Buchstabe: "  + buchstabe);
+    }
+}
+[/CODE]
+Erklärung zum Code:
+
+Jede Variable wird mit Typ, Name und Wert deklariert. Das + in println verbindet Text und Variablenwert zu einer Ausgabe. Der Typ legt fest, welche Werte erlaubt sind – int kann keine Kommazahlen speichern.
+
+Typische Fehler:
+
+•	int zahl = 3.5; → Compilerfehler, weil 3.5 ein double ist.
+
+•	boolean flag = 1; → In Java nicht erlaubt (kein C-Stil mit 0 und 1 für Wahrheitswerte).
+
+•	Variablenname beginnt mit einer Zahl: int 1zahl → Compilerfehler.
+
+
+
+Kapitel 9 – Variablen und Zuweisung
+
+Eine Variable ist ein benannter Speicherplatz. Du legst fest, welchen Datentyp sie hat, gibst ihr einen Namen und weist ihr einen Wert zu. In Java muss eine Variable deklariert werden, bevor sie benutzt werden kann.
+
+•	Deklaration = Typ + Name → int punkte;
+
+•	Initialisierung = erster Wert → punkte = 100;
+
+•	Zuweisung = Wert ändern → punkte = 150;
+
+Der =-Operator ist keine mathematische Gleichung, sondern eine Zuweisung: Der Wert rechts wird in die Variable links gespeichert. Was vorher drin war, ist verloren.
+
+Codebeispiel (AddTwo.java):
+[CODE]
+public class AddTwo {
+    public static void main( String[] args ) {
+        int zahl1 = 40;
+        int zahl2 = 2;
+        int summe;
+
+        summe = zahl1 + zahl2;
+        System.out.println("Die Summe ist: " + summe);
+    }
+}
+[/CODE]
+
+Erklärung zum Code:
+
+zahl1 und zahl2 werden sofort initialisiert. summe wird erst deklariert und danach durch Berechnung befüllt. Java liest die rechte Seite der Zuweisung vollständig aus, bevor der Wert gespeichert wird. Eine Zuweisung wie punkte = punkte + 10; ist daher gültig – erst wird rechts punkte + 10 berechnet, dann das Ergebnis zurück in punkte geschrieben.
+
+Typische Fehler:
+
+•	Variable benutzen bevor sie einen Wert hat → Compilerfehler: „variable might not have been initialized".
+
+•	= statt == beim Vergleich → logischer Fehler, kein Compilerfehler, aber falsches Verhalten.
+
+
+
+
+Kapitel 10 – Ausdrücke und arithmetische Operatoren
+
+Java kennt folgende arithmetische Operatoren:
+
+Operator	Bedeutung	Beispiel	Ergebnis
++		Addition	3 + 4		7
+-		Subtraktion	10 - 3		7
+*		Multiplikation	6 * 7		42
+/		Division	10 / 3		3 (Ganzzahl!)
+%		Modulo (Rest)	10 % 3		1
+
+Achtung Ganzzahldivision: Wenn beide Operanden int sind, wird der Rest beim Teilen einfach abgeschnitten – kein Runden! 10 / 3 ergibt 3, nicht 3.33. Das ist ein sehr häufiger Fehler.
+
+Codebeispiel (IntDivideTest.java):
+[CODE]
+public class IntDivideTest {
+    public static void main( String[] args ) {
+        int a = 10;
+        int b = 3;
+
+        System.out.println("Ganzzahldivision: " + (a / b));    // 3
+        System.out.println("Modulo (Rest):    " + (a % b));    // 1
+        System.out.println("Gleitkomma:       " + (10.0 / 3)); // 3.3333...
+    }
+}
+[/CODE]
+
+Operatorpriorität – Punkt vor Strich:
+
+*, /, % werden vor + und - ausgewertet. Klammern () ändern die Reihenfolge:
+[CODE]
+int ergebnis    = 2 + 3 * 4;     	// = 14 (NICHT 20!)
+int mitKlammer  = (2 + 3) * 4;   	// = 20
+[/CODE]
+Codebeispiel (RemainderExample.java) – Modulo-Anwendung:
+[CODE]
+public class RemainderExample {
+    public static void main( String[] args ) {
+        int sekunden = 137;
+
+        int minuten  = sekunden / 60;  	// 2
+        int rest     = sekunden % 60; 	 // 17
+
+        System.out.println(minuten + " Minuten und " + rest + " Sekunden");
+    }
+}
+[/CODE]
+Erklärung zum Code:
+
+Modulo ist in der Praxis sehr nützlich, z.B. um zu prüfen ob eine Zahl gerade ist (zahl % 2 == 0), oder um Zeitangaben umzurechnen.
+
+Typische Fehler:
+
+•	int x = 5 / 2; → ergibt 2, nicht 2.5. Für Kommaergebnis: double x = 5.0 / 2;
+
+•	Division durch Null bei int → ArithmeticException zur Laufzeit.
+
+
+
+Kapitel 11 – Objektdaten
+
+Neben primitiven Typen gibt es in Java Referenztypen: Das sind Objekte. Eine Referenzvariable speichert nicht den Wert direkt, sondern eine Adresse (Referenz) auf ein Objekt, das irgendwo im Heap-Speicher liegt. Der mit Abstand wichtigste Referenztyp für Anfänger ist String.
+String ist eine fertige Java-Klasse – du kannst darauf viele nützliche Methoden aufrufen:
+
+Codebeispiel (StringDemo1.java):
+[CODE]
+public class StringDemo1 {
+    public static void main( String[] args ) {
+        String name = "Max Mustermann";
+
+        System.out.println("Name:            " + name);
+        System.out.println("Länge:           " + name.length());
+        System.out.println("Großbuchstaben:  " + name.toUpperCase());
+        System.out.println("Erster Buchstabe:" + name.charAt(0));
+        System.out.println("Enthält 'Max':   " + name.contains("Max"));
+    }
+}
+[/CODE]
+Ausgabe:
+
+Name:            	Max Mustermann
+Länge:           	14
+Großbuchstaben:    MAX MUSTERMANN
+Erster Buchstabe: M
+Enthält 'Max':   true
+
+Unterschied primitiv vs. Referenz:
+[CODE]
+int a = 5;         		// Wert 5 direkt in a gespeichert
+String s = "Hallo"; 	// s enthält nur die Speicheradresse des String-Objekts
+[/CODE]
+
+Wenn du eine Methode aufrufst (name.length()), geht Java zur Adresse in name, findet das Objekt im Speicher und führt die Methode darauf aus.
+
+Typische Fehler:
+
+•	String mit == vergleichen → vergleicht Adressen, nicht Inhalte. Immer .equals() verwenden!
+
+•	Methode auf null-Referenz aufrufen → NullPointerException zur Laufzeit.
+
+
+
+
+
+Kapitel 12 – Ein- und Ausgabe (Konsolen-I/O)
+
+
+Ausgabe kennst du bereits. Für die Eingabe von der Tastatur wird die Klasse Scanner aus dem Paket java.util genutzt. Sie liest Texte oder Zahlen, die der Benutzer eintippt.
+
+Codebeispiel (EchoSquare.java):
+[CODE]
+import java.util.Scanner;
+
+public class EchoSquare {
+    public static void main( String[] args ) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Gib eine ganze Zahl ein: ");
+        int zahl = scanner.nextInt();
+
+        System.out.println("Das Quadrat ist: " + (zahl * zahl));
+    }
+}
+[/CODE]
+
+Erklärung zum Code:
+
+import java.util.Scanner; macht die Klasse für das Programm verfügbar. new Scanner(System.in) erzeugt ein Scanner-Objekt, das von der Tastatur (System.in) liest. nextInt() wartet so lange, bis der Benutzer eine Zahl eingibt und Enter drückt. System.out.print() (ohne ln) gibt Text aus ohne Zeilenumbruch – so bleibt der Cursor in derselben Zeile wie die Eingabeaufforderung.
+
+Wichtige Scanner-Methoden:
+
+Methode		Liest ein
+nextInt()	ganze Zahl (int)
+nextDouble()	Gleitkommazahl (double)
+next()		ein einzelnes Wort (bis Leerzeichen)
+nextLine()	eine ganze Zeile Text
+
+Erweitertes Beispiel (MultiEcho.java) – mehrere Eingaben:
+[CODE]
+import java.util.Scanner;
+
+public class MultiEcho {
+    public static void main( String[] args ) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Vorname: ");
+        String vorname = scanner.next();
+
+        System.out.print("Alter: ");
+        int alter = scanner.nextInt();
+
+        System.out.println("Hallo " + vorname + ", du bist " + alter + " Jahre alt.");
+    }
+}
+[/CODE]
+
+Typische Fehler:
+
+•	nextInt() direkt nach nextLine() → Scanner-Problem wegen verbliebenem Zeilenumbruch im Eingabepuffer. 
+Lösung: extra nextLine() dazwischen.
+
+•	Buchstaben eingeben wenn Zahl erwartet → InputMismatchException zur Laufzeit.
+
+
+
+
+
+Kapitel 13 – Gleitkommazahlen und mathematische Funktionen
+
+
+Für Berechnungen mit Dezimalzahlen wird in Java vor allem double verwendet (64 Bit, doppelte Genauigkeit). Wichtig: Gleitkommazahlen sind nicht exakt – es können kleine Rundungsfehler auftreten. Zum Beispiel ergibt 0.1 + 0.2 intern nicht exakt 0.3, sondern 0.30000000000000004. Das liegt an der binären Darstellung und ist kein Java-Bug, sondern ein allgemeines Problem digitaler Rechner.
+Java stellt die Klasse Math mit fertigen mathematischen Funktionen bereit – du musst diese nicht selbst programmieren:
+
+Methode			Funktion		Beispiel		Ergebnis
+Math.sqrt(x)		Quadratwurzel		Math.sqrt(9)		3.0
+Math.pow(x, y)		x hoch y			Math.pow(2, 10)		1024.0
+Math.abs(x)		Absolutbetrag		Math.abs(-5)		5
+Math.round(x)		Runden			Math.round(3.7)		4
+Math.min(a, b)		Kleineres von zwei Werten	Math.min(4, 7)		4
+Math.max(a, b)		Größeres von zwei Werten	Math.max(4, 7)		7
+Math.PI			Kreiszahl π		Math.PI			3.14159...
+Math.sin(x)		Sinus (im Bogenmaß)	Math.sin(Math.PI / 2)	1.0
+Math.cos(x)		Kosinus (im Bogenmaß)	Math.cos(0)		1.0
+Math.toRadians(x)		Grad → Bogenmaß		Math.toRadians(90)	1.5707...
+
+Codebeispiel (Hypotenuse.java) – Satz des Pythagoras:
+[CODE]
+public class Hypotenuse {
+    public static void main( String[] args ) {
+        double a = 3.0;
+        double b = 4.0;
+
+        double c = Math.sqrt( Math.pow(a, 2) + Math.pow(b, 2) );
+
+        System.out.println("Hypotenuse c = " + c); // 5.0
+    }
+}
+[/CODE]
+
+Erklärung zum Code:
+
+Math.pow(a, 2) berechnet a², Math.sqrt(...) zieht die Wurzel aus der Summe. Java wertet den Ausdruck von innen nach außen aus. Das Ergebnis ist 5.0 – ein klassisches pythagoreisches Tripel (3-4-5).
+
+Codebeispiel (Circumference.java) – Kreisumfang:
+
+[CODE]
+public class Circumference {
+    public static void main( String[] args ) {
+        double radius = 5.0;
+        double umfang = 2 * Math.PI * radius;
+
+        System.out.println("Umfang: " + umfang);
+    }
+}
+[/CODE]
+
+Codebeispiel (CosineCalc.java) – Winkelberechnung:
+
+[CODE]
+public class CosineCalc {
+    public static void main( String[] args ) {
+        double winkelGrad = 60.0;
+        double winkelRad  = Math.toRadians(winkelGrad);
+        double kosinus    = Math.cos(winkelRad);
+
+        System.out.println("cos(60°) = " + kosinus); // 0.5
+    }
+}
+[/CODE]
+
+Erklärung zum Code:
+
+Math.sin und Math.cos erwarten das Argument im Bogenmaß (Radiant), nicht in Grad. Die Hilfsmethode Math.toRadians() rechnet von Grad in Bogenmaß um. Das ist ein sehr häufiger Fehler beim ersten Einsatz dieser Methoden.
+
+Typische Fehler:
+
+•	Math.sqrt(-1) → ergibt NaN (Not a Number), kein Laufzeitfehler – aber das Ergebnis ist unbrauchbar.
+
+•	Winkel in Grad direkt an Math.sin() übergeben → falsches Ergebnis ohne Fehlermeldung.
+
+•	Math.pow(2, 10) gibt double zurück, auch wenn das Ergebnis ganzzahlig ist → bei Bedarf casten: (int) Math.pow(2, 10).
+
+
+
+
+
+
+Kapitel 14 – Formatierte Ausgabe mit DecimalFormat
+
+
+Ohne Formatierung gibt Java Gleitkommazahlen unkontrolliert aus: Math.PI ergibt 3.141592653589793. Für benutzerfreundliche Ausgaben – z.B. Geldbeträge, Messwerte oder Prozentzahlen – nutzt du DecimalFormat aus dem Paket java.text.
+Du definierst ein Muster (Pattern) als Text, das festlegt wie die Zahl aussehen soll:
+
+Zeichen 	im Muster		Bedeutung
+
+0				Pflichtziffer (wird als 0 angezeigt, auch wenn leer)
+#				optionale Ziffer (wird weggelassen, wenn leer)
+.				Dezimaltrennzeichen
+,				Tausendertrennzeichen
+%				multipliziert mit 100 und fügt %-Zeichen an
+
+
+
+Codebeispiel (LocaleDemo.java / LocaleDemoTwo.java):
+
+[CODE]
+import java.text.DecimalFormat;
+
+public class LocaleDemoTwo {
+    public static void main( String[] args ) {
+        double preis    = 19.9;
+        double pi       = Math.PI;
+        double anteil   = 0.758;
+        double gross    = 1234567.891;
+
+        DecimalFormat zweiStellen  = new DecimalFormat("0.00");
+        DecimalFormat vierStellen  = new DecimalFormat("0.0000");
+        DecimalFormat prozent      = new DecimalFormat("0.0%");
+        DecimalFormat tausender    = new DecimalFormat("#,##0.00");
+
+        System.out.println("Preis:     " + zweiStellen.format(preis));   // 19.90
+        System.out.println("Pi:        " + vierStellen.format(pi));      // 3.1416
+        System.out.println("Anteil:    " + prozent.format(anteil));      // 75.8%
+        System.out.println("Betrag:    " + tausender.format(gross));     // 1.234.567,89
+    }
+}
+[/CODE]
+
+Erklärung zum Code:
+
+new DecimalFormat("0.00") erzeugt ein Formatierungsobjekt mit dem Muster „mindestens eine Stelle vor dem Komma, genau zwei danach". df.format(zahl) wendet das Muster auf eine Zahl an und gibt einen formatierten String zurück. Das Original preis bleibt unverändert – format() erzeugt nur einen neuen Text für die Ausgabe.
+Wichtiger Hinweis – Ländereinstellungen (Locale):
+In Deutschland wird standardmäßig ein Komma als Dezimaltrennzeichen verwendet, in den USA ein Punkt. DecimalFormat richtet sich nach den Systemeinstellungen. Wenn du gezielt einen Punkt erzwingen willst:
+
+[CODE]
+DecimalFormat df = new DecimalFormat("0.00",
+    new java.text.DecimalFormatSymbols(java.util.Locale.US));
+[/CODE]
+
+Typische Fehler:
+
+•	format() gibt einen String zurück, keinen double – du kannst damit nicht weiterrechnen.
+
+•	Muster "0.00" rundet automatisch – das ist meistens gewünscht, aber wichtig zu wissen.
+
+
+
+
+
+Kapitel 15 – Formatierte Ausgabe mit printf()
+
+
+Eine weitere Methode für formatierte Ausgaben ist System.out.printf(). Sie stammt ursprünglich aus der Programmiersprache C und funktioniert mit sogenannten Format-Strings: Ein Text mit Platzhaltern, in die Werte eingesetzt werden.
+
+Aufbau eines Platzhalters: %[Breite][.Nachkommastellen]Typ
+
+Platzhalter		Typ		Bedeutung
+%d			int		ganze Dezimalzahl
+%f			double		Gleitkommazahl
+%.2f			double		Gleitkommazahl mit 2 Nachkommastellen
+%s			String		Zeichenkette
+%n			–		Zeilenumbruch (plattformunabhängig)
+%10d			int		ganze Zahl, rechtsbündig in 10 Zeichen
+%-10s			String		Text, linksbündig in 10 Zeichen
+
+Codebeispiel (PrintFloat.java):
+
+[CODE]
+public class PrintFloat {
+    public static void main( String[] args ) {
+        double pi    = Math.PI;
+        int    zahl  = 42;
+        String name  = "Java";
+
+        System.out.printf("Pi (Standard):     %f%n",    pi);
+        System.out.printf("Pi (2 Stellen):    %.2f%n",  pi);
+        System.out.printf("Pi (8 Stellen):    %.8f%n",  pi);
+        System.out.printf("Ganze Zahl:        %d%n",    zahl);
+        System.out.printf("Text:              %s%n",    name);
+    }
+}
+[/CODE]
+
+Ausgabe:
+
+Pi (Standard):     3.141593
+Pi (2 Stellen):    3.14
+Pi (8 Stellen):    3.14159265
+Ganze Zahl:        42
+Text:              Java
+
+Codebeispiel (LeftJust.java / ZeroPad.java) – Tabellenausgabe:
+
+[CODE]
+public class LeftJust {
+    public static void main( String[] args ) {
+        // Spalten: Name linksbündig (12 Zeichen), Wert rechtsbündig (8 Zeichen)
+        System.out.printf("%-12s %8s%n", "Produkt",   "Preis");
+        System.out.printf("%-12s %8.2f%n", "Apfel",   0.49);
+        System.out.printf("%-12s %8.2f%n", "Brot",    2.29);
+        System.out.printf("%-12s %8.2f%n", "Milch",   1.09);
+    }
+}
+[/CODE]
+
+Ausgabe:
+
+Produkt          Preis
+Apfel             0.49
+Brot              2.29
+Milch             1.09
+
+Codebeispiel (ZeroPad.java) – Nullen auffüllen:
+
+[CODE]
+public class ZeroPad {
+    public static void main( String[] args ) {
+        int artikelNr = 42;
+
+        // Nullen auffüllen auf 6 Stellen: 000042
+        System.out.printf("Artikelnummer: %06d%n", artikelNr);
+    }
+}
+[/CODE]
+
+Ausgabe:
+
+Artikelnummer: 000042
+
+Erklärung zum Code:
+
+%06d bedeutet: ganze Zahl (d), mindestens 6 Zeichen breit (6), fehlende Stellen mit Nullen füllen (0). Das ist z.B. für Artikelnummern, Rechnungsnummern oder Zeitangaben nützlich.
+
+Unterschied printf vs. println vs. DecimalFormat:
+
+Methode		Verwendung
+println		einfache Ausgabe ohne Formatierung
+printf		formatierte Ausgabe direkt beim Schreiben
+DecimalFormat	wenn man den formatierten Wert als String weiterverarbeiten will
+
+Typische Fehler:
+
+•	Falscher Platzhalter-Typ: %d für double → IllegalFormatConversionException zur Laufzeit.
+
+•	Zeilenumbruch mit \n statt %n → funktioniert oft, aber %n ist plattformübergreifend sicherer.
+
+•	Zu wenige oder zu viele Argumente für die Platzhalter → Laufzeitfehler.
+
+
+
+
+
+
+
+
+
+
+
+

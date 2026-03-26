@@ -1,0 +1,61 @@
+PART 13 – JavaFX Grafik
+(Kap. 120–121)
+
+Grundstruktur:
+[CODE]
+public class MeinProgramm extends Application {
+    public void start(Stage primaryStage) {
+        Circle kreis = new Circle(100, 100, 50);
+        kreis.setFill(Color.BLUE);
+
+        Group root  = new Group(kreis);
+        Scene scene = new Scene(root, 400, 300);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+[/CODE]
+
+Formen:
+[CODE]
+Circle     c = new Circle(cx, cy, radius);
+Rectangle  r = new Rectangle(x, y, width, height);
+Ellipse    e = new Ellipse(cx, cy, rx, ry);
+Line       l = new Line(x1, y1, x2, y2);
+Polygon    p = new Polygon(x1,y1, x2,y2, x3,y3);
+Arc        a = new Arc(cx, cy, rx, ry, start, length);
+Text       t = new Text(x, y, "Hallo");
+[/CODE]
+
+Farben:
+[CODE]
+shape.setFill(Color.RED);
+shape.setStroke(Color.BLACK);
+shape.setStrokeWidth(2.0);
+Color.rgb(255, 128, 0)  // orange
+Color.TRANSPARENT       // durchsichtig
+[/CODE]
+
+Transformationen:
+[CODE]
+shape.setRotate(45);      // 45° drehen
+shape.setTranslateX(100); // nach rechts verschieben
+shape.setScaleX(2.0);     // horizontal skalieren
+[/CODE]
+
+Koordinatensystem:
+• Ursprung (0,0) ist oben links
+• X wächst nach rechts
+• Y wächst nach unten
+
+Layout-Panes:
+• Group    – freie Positionierung per Koordinaten
+• StackPane – Elemente übereinander stapeln
+• HBox     – Elemente nebeneinander
+• VBox     – Elemente untereinander
+
+Dateien: TestFX.java, CircleScene.java, Pacman.java,
+         OneStar.java, JumpingJack.java, DrawBarBell.java

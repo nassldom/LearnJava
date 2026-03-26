@@ -1,0 +1,106 @@
+PART 2 – Erste Java-Programme
+
+Kapitel 5 – Einführung in Java
+
+Java ist eine objektorientierte Programmiersprache, die besonders wegen ihrer Plattformunabhängigkeit beliebt ist. Das bedeutet: Einmal kompilierter Java-Code läuft auf jedem Betriebssystem – egal ob Windows, Linux oder macOS. Das funktioniert so:
+
+1.	Du schreibst den Quellcode in einer .java-Datei.
+
+2.	Der Compiler (javac) übersetzt ihn in Bytecode (.class-Datei) – das ist kein direkter Maschinencode, sondern ein neutrales Zwischenformat.
+
+3.	Die Java Virtual Machine (JVM) interpretiert diesen Bytecode auf dem jeweiligen System und führt ihn aus.
+
+Codebeispiel (Hello.java):
+[CODE]
+public class Hello {
+    public static void main( String[] args ) {
+        System.out.println("Hello World!");
+    }
+}
+[/CODE]
+
+Erklärung zum Code:
+
+•	public class Hello – Jedes Java-Programm besteht aus mindestens einer Klasse. Der Dateiname muss gleich dem Klassennamen sein: Hello.java.
+
+•	public static void main(String[] args) – Das ist der Einstiegspunkt. Die JVM startet hier.
+
+•	System.out.println(...) – Gibt Text auf der Konsole aus, mit Zeilenumbruch am Ende.
+
+Typische Fehler:
+
+•	Klassenname und Dateiname stimmen nicht überein → Compilerfehler.
+
+•	Semikolon am Ende einer Zeile vergessen → Compilerfehler.
+
+•	Groß-/Kleinschreibung falsch (system statt System) → Compilerfehler.
+
+
+
+Kapitel 6 – Kleine Java-Programme
+
+
+Nachdem du „Hello World" kennst, geht es darum, den Aufbau weiterer Programme zu verstehen. Alle Java-Programme folgen derselben Grundstruktur: Eine Klasse mit einer main-Methode. Der Code innerhalb der Methode wird Zeile für Zeile von oben nach unten ausgeführt.
+
+Codebeispiel (HelloPlanets.java):
+[CODE]
+public class HelloPlanets {
+    public static void main( String[] args ) {
+        System.out.println("Mercury");
+        System.out.println("Venus");
+        System.out.println("Earth");
+        System.out.println("Mars");
+    }
+}
+[/CODE]
+
+Erklärung zum Code:
+
+Jede println-Zeile gibt eine eigene Zeile auf der Konsole aus. Der Code wird strikt von oben nach unten ausgeführt. Die geschweifte Klammer { öffnet einen Block, } schließt ihn. Einrückung (4 Leerzeichen oder 1 Tab) macht den Code lesbar – das ist in der Ausbildung und in Teams Pflicht.
+
+Merksätze:
+
+•	System.out.println(...) gibt Text mit Zeilenumbruch aus.
+
+•	System.out.print(...) gibt Text ohne Zeilenumbruch aus.
+
+•	Jede Anweisung endet mit einem Semikolon (;).
+
+
+________________________________________
+
+
+Kapitel 7 – Programme kompilieren und starten
+
+
+Bevor ein Java-Programm läuft, muss es kompiliert werden. Auf der Kommandozeile (Windows: Eingabeaufforderung / PowerShell) geht das so:
+Schritt 1 – Kompilieren:
+[CODE]
+javac Hello.java
+[/CODE]
+Wenn kein Fehler auftritt, wird eine Datei Hello.class erzeugt (Bytecode).
+Schritt 2 – Ausführen:
+[CODE]
+java Hello
+[/CODE]
+Die JVM startet die Klasse Hello und führt die main-Methode aus.
+
+Wichtige Regeln:
+
+•	Der Dateiname muss genau dem Klassennamen entsprechen (Groß-/Kleinschreibung!).
+
+•	javac kompiliert → erzeugt .class-Datei.
+
+•	java führt aus → kein .class am Ende angeben!
+
+•	Die Datei muss im aktuellen Verzeichnis liegen, oder der Classpath muss stimmen.
+
+Typische Fehler:
+
+•	error: class Hello is public, should be declared in a file named Hello.java → Dateiname falsch.
+
+•	Could not find or load main class Hello → Falsche Schreibweise beim Starten oder falscher Ordner.
+
+
+
+

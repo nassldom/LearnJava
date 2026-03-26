@@ -1,0 +1,79 @@
+PART 11 – Exceptions
+(Kap. 100–106)
+
+Grundstruktur:
+[CODE]
+try {
+    int result = 10 / 0; // wirft ArithmeticException
+} catch (ArithmeticException e) {
+    System.out.println("Fehler: " + e.getMessage());
+} finally {
+    System.out.println("Wird IMMER ausgeführt");
+}
+[/CODE]
+
+Häufige Exception-Typen:
+• ArithmeticException            – Division durch 0
+• ArrayIndexOutOfBoundsException – Index außerhalb Array
+• NullPointerException           – Methode auf null
+• NumberFormatException          – ungültiger String zu Zahl
+• IOException                    – Datei-Fehler
+
+Exception weiterwerfen:
+[CODE]
+public void methode() throws IOException {
+    // IOException nicht hier behandeln,
+    // sondern an den Aufrufer weitergeben
+}
+[/CODE]
+
+Eigene Exception:
+[CODE]
+public class MeineException extends Exception {
+    public MeineException(String message) {
+        super(message);
+    }
+}
+
+// Werfen:
+throw new MeineException("Ungültiger Wert!");
+[/CODE]
+
+Mehrere catch-Blöcke:
+[CODE]
+try {
+    // Code
+} catch (NumberFormatException e) {
+    System.out.println("Keine gültige Zahl");
+} catch (IOException e) {
+    System.out.println("Datei-Fehler");
+} finally {
+    System.out.println("Aufräumen");
+}
+[/CODE]
+
+Binärdateien:
+[CODE]
+DataOutputStream out = new DataOutputStream(
+    new FileOutputStream("daten.bin"));
+out.writeInt(42);
+out.writeDouble(3.14);
+out.close();
+[/CODE]
+
+File-Klasse:
+[CODE]
+File f = new File("test.txt");
+f.exists()  // existiert die Datei?
+f.length()  // Dateigröße in Bytes
+f.delete()  // Datei löschen
+[/CODE]
+
+Merksatz:
+• catch  – fängt Fehler ab, Programm läuft weiter
+• finally – läuft IMMER, auch bei Exception
+• throws  – Methode gibt Exception weiter
+• throw   – Exception manuell auslösen
+
+Dateien: EchoSquareException.java, BuckPasser.java,
+         SquareFix.java, FinallyPractice.java, WriteInts.java

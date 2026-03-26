@@ -1,0 +1,79 @@
+PART 14 – Linked Lists
+(Kap. 130–133)
+
+Node (Knoten) – Grundbaustein:
+[CODE]
+public class Node {
+    private int value;
+    private Node next; // Zeiger auf nächsten Knoten
+
+    public Node(int value) {
+        this.value = value;
+        this.next  = null;
+    }
+    public int  getValue()       { return value; }
+    public Node getNext()        { return next; }
+    public void setNext(Node n)  { next = n; }
+}
+[/CODE]
+
+LinkedList – wichtige Methoden:
+[CODE]
+insertFirst(data) // vorne einfügen
+deleteFirst()     // vorne löschen
+traverse()        // alle Knoten ausgeben
+getFirst()        // ersten Wert lesen
+getLast()         // bis Ende traversieren
+isEmpty()         // Liste leer?
+[/CODE]
+
+GenericNode<E> – typsicher:
+[CODE]
+public class GenericNode<E> {
+    private E value;
+    private GenericNode<E> next;
+
+    public GenericNode(E value) {
+        this.value = value;
+        this.next  = null;
+    }
+    public E           getValue()            { return value; }
+    public GenericNode<E> getNext()          { return next; }
+    public void        setNext(GenericNode<E> n) { next = n; }
+}
+[/CODE]
+
+GenericLinkedList<E> – für jeden Typ:
+[CODE]
+// Integer-Liste:
+GenericLinkedList<Integer> intList = new GenericLinkedList<>();
+intList.insertFirst(42);
+intList.insertFirst(17);
+
+// Bird-Liste – gleiche Klasse, anderer Typ!
+GenericLinkedList<Bird> birdList = new GenericLinkedList<>();
+birdList.insertFirst(new Bird("Turdus","migratoris","Robin",1));
+[/CODE]
+
+getLast() Implementierung:
+[CODE]
+public E getLast() {
+    if (isEmpty()) return null;
+    GenericNode<E> p = headPtr;
+    while (p.getNext() != null)
+        p = p.getNext();
+    return p.getValue();
+}
+[/CODE]
+
+Merksatz:
+• Linked List vs. Array:
+  - Array:      feste Größe, schneller Index-Zugriff
+  - LinkedList: variable Größe, kein direkter Index
+• Generic = wiederverwendbar für jeden Referenztyp
+• Primitive (int, double) nicht direkt →
+  Wrapper verwenden (Integer, Double)
+• Autoboxing: insertFirst(42) → Integer automatisch
+
+Dateien: Node.java, LinkedList.java, OrderedLinkedList.java,
+         GenericNode.java, GenericLinkedList.java, Bird.java

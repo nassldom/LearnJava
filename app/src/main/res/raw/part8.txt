@@ -1,0 +1,42 @@
+PART 8 – File I/O
+(Kap. 70–73)
+
+Datei lesen mit Scanner:
+[CODE]
+import java.io.*;
+import java.util.Scanner;
+
+Scanner scan = new Scanner(new File("daten.txt"));
+while (scan.hasNextInt()) {
+    int zahl = scan.nextInt();
+    System.out.println(zahl * zahl);
+}
+scan.close(); // immer schließen!
+[/CODE]
+
+Datei schreiben mit PrintWriter:
+[CODE]
+PrintWriter output = new PrintWriter("ausgabe.txt");
+output.println("Hallo Datei!");
+output.printf("Zahl: %d%n", 42);
+output.close(); // ohne close() gehen Daten verloren!
+[/CODE]
+
+Dateiname aus Benutzereingabe:
+[CODE]
+Scanner user = new Scanner(System.in);
+String name  = user.nextLine().trim(); // trim() wichtig!
+Scanner scan = new Scanner(new File(name));
+[/CODE]
+
+Wichtige Regeln:
+• main muss "throws IOException" deklarieren
+• new Scanner("datei.txt") → FALSCH (durchsucht den String!)
+• new Scanner(new File("datei.txt")) → RICHTIG
+
+Eingabe-Schleifen:
+• Zählschleife:  Erste Zahl = Anzahl der folgenden Werte
+• Sentinel-Loop: Sonderwert (z.B. -1) signalisiert Ende
+• hasNextInt():  prüft ob nächstes Token eine Zahl ist
+
+Dateien: EchoSquareDisk.java, NamedFileInOut.java, WriteTextFile.java

@@ -1,0 +1,73 @@
+PART 9 – Fortgeschrittene OOP
+(Kap. 80–86)
+
+Vererbung (extends):
+[CODE]
+public class Toy extends Goods {
+    public Toy(String des, double pr) {
+        super(des, pr); // Eltern-Konstruktor
+    }
+}
+[/CODE]
+
+Abstract Class:
+[CODE]
+public abstract class Shape {
+    public abstract double area(); // muss überschrieben werden
+    public void print() {
+        System.out.println("Fläche: " + area());
+    }
+}
+// new Shape() → FEHLER! Kann nicht instanziiert werden.
+[/CODE]
+
+Interface:
+[CODE]
+public interface Taxable {
+    double TAXRATE = 0.06; // automatisch public static final
+    double calculateTax(); // automatisch public abstract
+}
+
+public class Toy extends Goods implements Taxable {
+    public double calculateTax() {
+        return price * TAXRATE;
+    }
+}
+[/CODE]
+
+Interface als Typ:
+[CODE]
+Taxable item = new Toy("Ball", 5.00);
+System.out.println(item.calculateTax()); // 0.30
+[/CODE]
+
+Comparable:
+[CODE]
+public class Book implements Comparable<Book> {
+    public int compareTo(Book other) {
+        return this.title.compareTo(other.title);
+    }
+}
+[/CODE]
+
+ArrayList:
+[CODE]
+import java.util.*;
+ArrayList<String> liste = new ArrayList<>();
+liste.add("Anna");
+liste.add("Bob");
+System.out.println(liste.get(0)); // "Anna"
+liste.remove(0);
+System.out.println(liste.size()); // 1
+Collections.sort(liste);
+[/CODE]
+
+Iterator:
+[CODE]
+Iterator<String> it = liste.iterator();
+while (it.hasNext()) {
+    System.out.println(it.next());
+}
+[/CODE]
+
+Dateien: VideoStore02.java, CardTester.java, Bird.java, ArrayListEg.java
