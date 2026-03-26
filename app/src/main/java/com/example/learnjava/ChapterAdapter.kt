@@ -12,7 +12,7 @@ class ChapterAdapter(
 ) : RecyclerView.Adapter<ChapterAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val title: TextView = view.findViewById(R.id.tvTitle)
+        val title:   TextView = view.findViewById(R.id.tvTitle)
         val summary: TextView = view.findViewById(R.id.tvSummary)
     }
 
@@ -25,7 +25,23 @@ class ChapterAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val chapter = chapters[position]
         holder.title.text = chapter.title
-        holder.summary.text = chapter.content.take(100) + "..."
+
+        // Zeige summary wenn vorhanden, sonst ersten Satz aus content
+        val displayText = when {
+            chapter.summary.isNotBlank() -> chapter.summary
+            chapter.content.isNotBlank() -> {
+                // Ersten sinnvollen Satz/Zeile aus content extrahieren (ohne [CODE]-Tags)
+                chapter.content
+                    .replace(Regex("\\[CODE\\][\\s\\S]*?\\[/CODE\\]"), "")
+                    .trim()
+                    .lines()
+                    .firstOrNull { it.isNotBlank() }
+                    ?.take(120)
+                    ?: ""
+            }
+            else -> ""
+        }
+        holder.summary.text = displayText
         holder.itemView.setOnClickListener { onClick(chapter) }
     }
 
