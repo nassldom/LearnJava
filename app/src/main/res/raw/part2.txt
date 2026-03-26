@@ -1,16 +1,19 @@
-PART 2 – Erste Java-Programme
+<b>PART 2 – Erste Java-Programme</b>
 
-Kapitel 5 – Einführung in Java
+<b>Kapitel 5 – Einführung in Java</b>
 
-Java ist eine objektorientierte Programmiersprache, die besonders wegen ihrer Plattformunabhängigkeit beliebt ist. Das bedeutet: Einmal kompilierter Java-Code läuft auf jedem Betriebssystem – egal ob Windows, Linux oder macOS. Das funktioniert so:
+<i>Java</i> ist eine objektorientierte Programmiersprache, die besonders wegen ihrer <u>Plattformunabhängigkeit</u> beliebt ist. Das bedeutet: <b>Einmal kompilierter Java-Code läuft auf jedem Betriebssystem</b> – egal ob Windows, Linux oder macOS.
 
-1.	Du schreibst den Quellcode in einer .java-Datei.
+Das funktioniert so:
 
-2.	Der Compiler (javac) übersetzt ihn in Bytecode (.class-Datei) – das ist kein direkter Maschinencode, sondern ein neutrales Zwischenformat.
+<b>1.</b> Du schreibst den Quellcode in einer <i>.java-Datei</i>.
 
-3.	Die Java Virtual Machine (JVM) interpretiert diesen Bytecode auf dem jeweiligen System und führt ihn aus.
+<b>2.</b> Der Compiler (<i>javac</i>) übersetzt ihn in <i>Bytecode</i> (.class-Datei) – das ist kein direkter Maschinencode, sondern ein neutrales Zwischenformat.
 
-Codebeispiel (Hello.java):
+<b>3.</b> Die <i>Java Virtual Machine (JVM)</i> interpretiert diesen Bytecode auf dem jeweiligen System und führt ihn aus.
+
+<b>Codebeispiel (Hello.java):</b>
+
 [CODE]
 public class Hello {
     public static void main( String[] args ) {
@@ -19,30 +22,29 @@ public class Hello {
 }
 [/CODE]
 
-Erklärung zum Code:
+<b>Erklärung zum Code:</b>
 
-•	public class Hello – Jedes Java-Programm besteht aus mindestens einer Klasse. Der Dateiname muss gleich dem Klassennamen sein: Hello.java.
+• <b>public class Hello</b> – Jedes Java-Programm besteht aus mindestens einer Klasse. Der Dateiname muss gleich dem Klassennamen sein: Hello.java.
 
-•	public static void main(String[] args) – Das ist der Einstiegspunkt. Die JVM startet hier.
+• <b>public static void main(String[] args)</b> – Das ist der Einstiegspunkt. Die JVM startet hier.
 
-•	System.out.println(...) – Gibt Text auf der Konsole aus, mit Zeilenumbruch am Ende.
+• <b>System.out.println(...)</b> – Gibt Text auf der Konsole aus, mit Zeilenumbruch am Ende.
 
-Typische Fehler:
+<b>Typische Fehler:</b>
 
-•	Klassenname und Dateiname stimmen nicht überein → Compilerfehler.
+• Klassenname und Dateiname stimmen nicht überein → Compilerfehler.
 
-•	Semikolon am Ende einer Zeile vergessen → Compilerfehler.
+• Semikolon am Ende einer Zeile vergessen → Compilerfehler.
 
-•	Groß-/Kleinschreibung falsch (system statt System) → Compilerfehler.
-
-
-
-Kapitel 6 – Kleine Java-Programme
+• Groß-/Kleinschreibung falsch (system statt System) → Compilerfehler.
 
 
-Nachdem du „Hello World" kennst, geht es darum, den Aufbau weiterer Programme zu verstehen. Alle Java-Programme folgen derselben Grundstruktur: Eine Klasse mit einer main-Methode. Der Code innerhalb der Methode wird Zeile für Zeile von oben nach unten ausgeführt.
+<b>Kapitel 6 – Kleine Java-Programme</b>
 
-Codebeispiel (HelloPlanets.java):
+Nachdem du „Hello World" kennst, geht es darum, den Aufbau weiterer Programme zu verstehen. Alle Java-Programme folgen derselben Grundstruktur: <b>Eine Klasse mit einer main-Methode</b>. Der Code innerhalb der Methode wird <u>Zeile für Zeile von oben nach unten</u> ausgeführt.
+
+<b>Codebeispiel (HelloPlanets.java):</b>
+
 [CODE]
 public class HelloPlanets {
     public static void main( String[] args ) {
@@ -54,53 +56,51 @@ public class HelloPlanets {
 }
 [/CODE]
 
-Erklärung zum Code:
+<b>Erklärung zum Code:</b>
 
-Jede println-Zeile gibt eine eigene Zeile auf der Konsole aus. Der Code wird strikt von oben nach unten ausgeführt. Die geschweifte Klammer { öffnet einen Block, } schließt ihn. Einrückung (4 Leerzeichen oder 1 Tab) macht den Code lesbar – das ist in der Ausbildung und in Teams Pflicht.
+Jede println-Zeile gibt eine eigene Zeile auf der Konsole aus. Der Code wird strikt von oben nach unten ausgeführt. Die geschweifte Klammer <b>{</b> öffnet einen Block, <b>}</b> schließt ihn. Einrückung (4 Leerzeichen oder 1 Tab) macht den Code lesbar – das ist in der Ausbildung und in Teams <u>Pflicht</u>.
 
-Merksätze:
+<b>Merksätze:</b>
 
-•	System.out.println(...) gibt Text mit Zeilenumbruch aus.
+• <b>System.out.println(...)</b> gibt Text mit Zeilenumbruch aus.
 
-•	System.out.print(...) gibt Text ohne Zeilenumbruch aus.
+• <b>System.out.print(...)</b> gibt Text ohne Zeilenumbruch aus.
 
-•	Jede Anweisung endet mit einem Semikolon (;).
-
-
-________________________________________
+• Jede Anweisung endet mit einem Semikolon <b>(;)</b>.
 
 
-Kapitel 7 – Programme kompilieren und starten
+<b>Kapitel 7 – Programme kompilieren und starten</b>
 
+Bevor ein Java-Programm läuft, muss es <u>kompiliert</u> werden. Auf der Kommandozeile (Windows: Eingabeaufforderung / PowerShell) geht das so:
 
-Bevor ein Java-Programm läuft, muss es kompiliert werden. Auf der Kommandozeile (Windows: Eingabeaufforderung / PowerShell) geht das so:
-Schritt 1 – Kompilieren:
+<b>Schritt 1 – Kompilieren:</b>
+
 [CODE]
 javac Hello.java
 [/CODE]
-Wenn kein Fehler auftritt, wird eine Datei Hello.class erzeugt (Bytecode).
-Schritt 2 – Ausführen:
+
+Wenn kein Fehler auftritt, wird eine Datei <i>Hello.class</i> erzeugt (Bytecode).
+
+<b>Schritt 2 – Ausführen:</b>
+
 [CODE]
 java Hello
 [/CODE]
+
 Die JVM startet die Klasse Hello und führt die main-Methode aus.
 
-Wichtige Regeln:
+<b>Wichtige Regeln:</b>
 
-•	Der Dateiname muss genau dem Klassennamen entsprechen (Groß-/Kleinschreibung!).
+• Der Dateiname muss genau dem Klassennamen entsprechen (Groß-/Kleinschreibung!).
 
-•	javac kompiliert → erzeugt .class-Datei.
+• <i>javac</i> kompiliert → erzeugt .class-Datei.
 
-•	java führt aus → kein .class am Ende angeben!
+• <i>java</i> führt aus → <u>kein .class am Ende angeben!</u>
 
-•	Die Datei muss im aktuellen Verzeichnis liegen, oder der Classpath muss stimmen.
+• Die Datei muss im aktuellen Verzeichnis liegen, oder der Classpath muss stimmen.
 
-Typische Fehler:
+<b>Typische Fehler:</b>
 
-•	error: class Hello is public, should be declared in a file named Hello.java → Dateiname falsch.
+• <i>error: class Hello is public, should be declared in a file named Hello.java</i> → Dateiname falsch.
 
-•	Could not find or load main class Hello → Falsche Schreibweise beim Starten oder falscher Ordner.
-
-
-
-
+• <i>Could not find or load main class Hello</i> → Falsche Schreibweise beim Starten oder falscher Ordner.
