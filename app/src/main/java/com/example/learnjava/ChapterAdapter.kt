@@ -26,6 +26,7 @@ class ChapterAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val chapter = chapters[position]
+
         holder.title.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Html.fromHtml(chapter.title, Html.FROM_HTML_MODE_LEGACY)
         } else {
@@ -33,25 +34,24 @@ class ChapterAdapter(
             Html.fromHtml(chapter.title)
         }
 
-        // Vorschautext generieren
         val rawText = when {
             chapter.summary.isNotBlank() -> chapter.summary
             chapter.content.isNotBlank() -> {
                 chapter.content
                     .replace(Regex("\\[CODE\\][\\s\\S]*?\\[/CODE\\]"), "")
                     .trim()
-                    .take(150) // Nimm die ersten 150 Zeichen für die Vorschau
+                    .take(150)
             }
             else -> ""
         }
 
-        var processed = rawText.replace("
-", " ") // Zeilenumbrüche in Leerzeichen für die einzeilige/kurze Vorschau
+        // Korrektur: Zeilenumbrüche und Markdown-Formatierung
+        var processed = rawText.replace("\n", "<br>")
         
-        // Formate in HTML rendern
-        while (processed.contains("**")) {
-            processed = processed.replaceFirst("**", "<b>").replaceFirst("**", "</b>")
-        }
+        // **Fett** -> <b>Fett</b>
+        processed = processed.replace(Regex("\\*\\*(.*?)\\*\\*"), "<b>$1</b>")
+        // *Kursiv* -> <i>Kursiv</i>
+        processed = processed.replace(Regex("\\*(.*?)\\*"), "<i>$1</i>")
 
         val htmlText = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Html.fromHtml(processed, Html.FROM_HTML_MODE_LEGACY)
