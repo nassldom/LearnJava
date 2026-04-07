@@ -26,16 +26,23 @@ class MainActivity : AppCompatActivity() {
             Chapter(11, "Part 11 – Exceptions",               "Kap. 100–106: try/catch, eigene Exceptions, finally, Binary Files, File-Klasse"),
             Chapter(12, "Part 12 – Sortieralgorithmen",       "Kap. 110–112: Selection Sort, Insertion Sort, Arrays.sort(), Objekte sortieren"),
             Chapter(13, "Part 13 – JavaFX Grafik",            "Kap. 120–121: JavaFX Shapes, Linien, Polygone, Text, Emojis, Rotation, Fraktale"),
-            Chapter(14, "Part 14 – Linked Lists",             "Kap. 130–133: Node, LinkedList, OrderedLinkedList, GenericNode, GenericLinkedList")
+            Chapter(14, "Part 14 – Linked Lists",             "Kap. 130–133: Node, LinkedList, OrderedLinkedList, GenericNode, GenericLinkedList"),
+            Chapter(-1, "Nach Begriff suchen: ", "Suche nach Inhalten in allen Teilen")
         )
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = ChapterAdapter(chapters) { chapter ->
-            val intent = Intent(this, PartDetailActivity::class.java)
-            intent.putExtra("part_title", chapter.title)
-            intent.putExtra("chapterNumber", chapter.number)
-            startActivity(intent)
+            if (chapter.number == -1) {
+                // Starte die Such-Aktivität
+                startActivity(Intent(this, SearchActivity::class.java))
+            } else {
+                // Normaler Part-Aufruf
+                val intent = Intent(this, PartDetailActivity::class.java)
+                intent.putExtra("part_title", chapter.title)
+                intent.putExtra("chapterNumber", chapter.number)
+                startActivity(intent)
+            }
         }
     }
 }
