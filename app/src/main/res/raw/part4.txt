@@ -1,10 +1,11 @@
-TEIL 4 – Verzweigungen und Schleifen (Kapitel 16–25)
+<b>TEIL 4 – Verzweigungen und Schleifen (Kapitel 16–25)</b>
 
-Kapitel 16 – Die if-Anweisung
+<b>Kapitel 16 – Die if-Anweisung</b>
 
-Mit der if-Anweisung triffst du Entscheidungen im Programm: Ein bestimmter Codeblock wird nur ausgeführt, wenn eine Bedingung wahr (true) ist. Eine Bedingung ist ein boolescher Ausdruck, der entweder true oder false ergibt, z.B. alter >= 18. Mit if-else kannst du zwei Alternativen abbilden: „Wenn Bedingung erfüllt, dann A, sonst B". In der Praxis nutzt du das für Eingabeprüfungen, Zugriffsrechte, Menüauswahl oder Geschäftsregeln.
+Mit der <b>if-Anweisung</b> triffst du Entscheidungen im Programm: Ein bestimmter Codeblock wird nur ausgeführt, wenn eine Bedingung wahr (true) ist.
 
-Codebeispiel (BoxOffice.java):
+<b>Zweiseitige Entscheidung (if-else):</b>
+„Wenn Bedingung erfüllt, dann A, sonst B".
 
 [CODE]
 import java.util.Scanner;
@@ -12,7 +13,6 @@ import java.util.Scanner;
 public class BoxOffice {
     public static void main( String[] args ) {
         Scanner scanner = new Scanner(System.in);
-
         System.out.print("Wie alt bist du? ");
         int alter = scanner.nextInt();
 
@@ -25,60 +25,14 @@ public class BoxOffice {
 }
 [/CODE]
 
-Erklärung zum Code:
+<b>Vergleichsoperatoren:</b>
+• <b>==</b> gleich, <b>!=</b> ungleich
+• <b><</b> kleiner, <b>></b> größer
+• <b><=</b> kleiner-gleich, <b>>=</b> größer-gleich
 
-Die Bedingung alter >= 18 wird ausgewertet: Ist sie wahr (true), wird der erste Block ausgeführt, ist sie falsch (false), springt Java in den else-Block. Die geschweiften Klammern {} fassen mehrere Anweisungen zu einem Block zusammen. Saubere Einrückung (4 Leerzeichen) ist in der Ausbildung und in Teams verpflichtend – sie macht sofort sichtbar, welcher Code zu welchem Block gehört.
-Vergleichsoperatoren im Überblick:
+<b>Kapitel 17 – Einseitige Verzweigung</b>
 
-Operator	Bedeutung		Beispiel
-==		gleich			alter == 18
-!=		ungleich		alter != 0
-<		kleiner als		punkte < 50
->		größer als		punkte > 100
-<=		kleiner oder gleich	alter <= 17
->=		größer oder gleich	alter >= 18
-
-Codebeispiel (RainTester.java) – if/else if/else:
-
-[CODE]
-import java.util.Scanner;
-
-public class RainTester {
-    public static void main( String[] args ) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Regenwahrscheinlichkeit in %: ");
-        int regen = scanner.nextInt();
-
-        if ( regen >= 80 ) {
-            System.out.println("Regenschirm mitnehmen!");
-        } else if ( regen >= 40 ) {
-            System.out.println("Vielleicht einen Schirm einpacken.");
-        } else {
-            System.out.println("Kein Schirm nötig.");
-        }
-    }
-}
-[/CODE]
-
-Typische Fehler:
-
-•	Semikolon direkt nach if (Bedingung); → der if-Block ist leer, der folgende Code wird immer ausgeführt.
-
-•	= statt == beim Vergleich: if (x = 5) → Compilerfehler bei primitiven Typen.
-
-•	Fehlende {} bei mehreren Anweisungen im Block → nur die erste Zeile gehört zum if.
-
-
-
-
-
-Kapitel 17 – Einfache if-Anweisung (ohne else)
-
-
-Manchmal soll nur im positiven Fall etwas passieren – und wenn die Bedingung nicht zutrifft, geht das Programm einfach weiter. Dafür braucht man kein else. Das nennt sich einseitige Verzweigung und ist besonders nützlich für optionale Aktionen wie Boni, Warnmeldungen oder Korrekturen.
-
-Codebeispiel (CarPurchase.java):
+Manchmal soll nur im positiven Fall etwas passieren. Dafür braucht man kein else.
 
 [CODE]
 import java.util.Scanner;
@@ -86,702 +40,151 @@ import java.util.Scanner;
 public class CarPurchase {
     public static void main( String[] args ) {
         Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Jahreseinkommen in Euro: ");
+        System.out.print("Jahreseinkommen: ");
         double einkommen = scanner.nextDouble();
-
         double preis = 25000.0;
 
         if ( einkommen > 50000 ) {
-            preis = preis * 0.95; // 5% Rabatt für Besserverdiener
-            System.out.println("Sie erhalten 5% Rabatt!");
+            preis = preis * 0.95; // 5% Rabatt
+            System.out.println("Sie erhalten Rabatt!");
         }
-
-        System.out.println("Ihr Kaufpreis: " + preis + " Euro");
+        System.out.println("Kaufpreis: " + preis);
     }
 }
 [/CODE]
 
-Erklärung zum Code:
+<b>Kapitel 18 – Boolesche Ausdrücke & Logische Operatoren</b>
 
-Der Rabatt-Block wird nur ausgeführt, wenn das Einkommen über 50.000 liegt. Die letzte println-Zeile wird immer ausgeführt, egal ob der Rabatt gilt oder nicht – sie steht außerhalb des if-Blocks. Das ist das Kernprinzip der einseitigen Verzweigung.
+Mit logischen Operatoren kombinierst du Bedingungen:
+• <b>&& (UND)</b>: Beide müssen wahr sein
+• <b>|| (ODER)</b>: Mindestens eine muss wahr sein
+• <b>! (NICHT)</b>: Kehrt den Wert um
 
-Weiteres Beispiel (CookieDecision.java):
+<b>Kurzschlussauswertung:</b> Java bricht ab, wenn das Ergebnis feststeht (z.B. bei &&, wenn links schon false ist).
 
-[CODE]
-public class CookieDecision {
-    public static void main( String[] args ) {
-        int kalorien = 2100;
-        int limit    = 2000;
+<b>Kapitel 19 – Schleifen und die while-Anweisung</b>
 
-        if ( kalorien > limit ) {
-            System.out.println("Warnung: Tageskaloriengrenze überschritten!");
-        }
-
-        System.out.println("Tageszusammenfassung abgeschlossen.");
-    }
-}
-[/CODE]
-
-Merksatz:
-
-•	if ohne else = einseitige Verzweigung. Der Code danach läuft immer weiter.
-
-•	if mit else = zweiseitige Verzweigung. Genau einer der beiden Blöcke wird ausgeführt.
-
-Typische Fehler:
-
-•	Versehentlich den Folge-Code eingerückt (optisch Teil des if), obwohl er immer laufen soll → führt zu Verwirrung beim Lesen und Warten von Code.
-
-
-
-
-
-
-Kapitel 18 – Boolesche Ausdrücke
-
-
-Oft reicht eine einfache Bedingung nicht aus. Mit logischen Operatoren kombinierst du mehrere Bedingungen:
-
-Operator	Name		Bedeutung					Beispiel
-
-&&		UND		beide Bedingungen müssen wahr sein		alter >= 18 && land.equals("DE")
-
-\|\|		ODER		mindestens eine Bedingung muss wahr sein	tag == 6 \|\| tag == 7
-
-!		NICHT		Bedingung umkehren				!istGesperrt
-
-Codebeispiel (Discount.java):
-
-[CODE]
-public class Discount {
-    public static void main( String[] args ) {
-        int alter       = 67;
-        boolean mitglied = true;
-
-        if ( alter >= 65 || mitglied ) {
-            System.out.println("Rabatt gewährt.");
-        } else {
-            System.out.println("Kein Rabatt.");
-        }
-    }
-}
-[/CODE]
-
-Erklärung zum Code:
-
-Der Rabatt gilt, wenn jemand mindestens 65 Jahre alt oder Mitglied ist – eine Bedingung reicht. Mit && würden beide zutreffen müssen. Mit ! kannst du eine Bedingung umdrehen, z.B. !istGesperrt ist true, wenn istGesperrt den Wert false hat.
-
-Kurzschlussauswertung (Short-Circuit):
-
-Java wertet logische Ausdrücke von links nach rechts aus und bricht frühzeitig ab:
-
-•	Bei &&: Ist die linke Seite bereits false, wird die rechte Seite nicht mehr ausgewertet.
-
-•	Bei ||: Ist die linke Seite bereits true, wird die rechte Seite nicht mehr ausgewertet.
-
-Das ist nützlich für sichere Prüfungen:
-
-[CODE]
-// Erst auf null prüfen, dann Methode aufrufen – kein NullPointerException:
-if ( name != null && name.length() > 0 ) {
-    System.out.println("Name ist gültig.");
-}
-[/CODE]
-
-Typische Fehler:
-
-•	&& und || verwechseln → logisch falsches Ergebnis ohne Compilerfehler.
-
-•	== bei Strings statt .equals() → Referenzvergleich statt Inhaltsvergleich.
-
-
-
-
-
-Kapitel 19 – Schleifen und die while-Anweisung
-
-
-Mit einer Schleife wird ein Codeblock wiederholt ausgeführt, solange eine Bedingung wahr ist. Die while-Schleife prüft die Bedingung vor jedem Durchlauf. Ist die Bedingung von Anfang an false, wird der Block kein einziges Mal ausgeführt.
-
-Aufbau:
-
-while ( Bedingung ) {
-    // Anweisungen, die wiederholt werden
-    // irgendwann muss die Bedingung false werden!
-}
-
-Codebeispiel (LoopExample.java):
+Eine Schleife wiederholt Code, solange eine Bedingung wahr ist. Die <b>while-Schleife</b> prüft die Bedingung <u>vor</u> dem Durchlauf.
 
 [CODE]
 public class LoopExample {
     public static void main( String[] args ) {
         int zahl = 1;
-
         while ( zahl <= 5 ) {
-            System.out.println("Durchlauf: " + zahl);
-            zahl = zahl + 1; // ohne diese Zeile: Endlosschleife!
-        }
-
-        System.out.println("Fertig.");
-    }
-}
-[/CODE]
-
-Ausgabe:
-
-Durchlauf: 1
-Durchlauf: 2
-Durchlauf: 3
-Durchlauf: 4
-Durchlauf: 5
-Fertig.
-
-Erklärung zum Code:
-
-Die Schleife hat drei wichtige Bestandteile:
-
-1.	Initialisierung (vor der Schleife): int zahl = 1;
-2.	Bedingung (Schleifenkopf): zahl <= 5
-3.	Aktualisierung (im Schleifenkörper): zahl = zahl + 1;
-
-Fehlt die Aktualisierung, bleibt zahl immer 1, die Bedingung ist immer true → Endlosschleife. Das Programm hängt dann und muss manuell abgebrochen werden.
-
-Codebeispiel (AddUpNumbers.java) – Summe mit while:
-
-[CODE]
-import java.util.Scanner;
-
-public class AddUpNumbers {
-    public static void main( String[] args ) {
-        Scanner scanner = new Scanner(System.in);
-        int summe  = 0;
-        int anzahl = 5;
-        int zahl;
-        int i = 1;
-
-        while ( i <= anzahl ) {
-            System.out.print("Zahl " + i + ": ");
-            zahl   = scanner.nextInt();
-            summe  = summe + zahl;
-            i      = i + 1;
-        }
-
-        System.out.println("Summe: " + summe);
-    }
-}
-[/CODE]
-
-Typische Fehler:
-
-•	Aktualisierungsvariable vergessen → Endlosschleife.
-
-•	Bedingung falsch formuliert (z.B. > statt <) → Schleife läuft nie oder zu oft.
-
-•	Schleifenvariable falsch initialisiert (z.B. int i = 0 statt 1) → ein Durchlauf zu viel oder zu wenig.
-
-
-
-
-
-
-
-Kapitel 20 – Zählschleifen
-
-
-Eine Zählschleife läuft eine genau festgelegte Anzahl von Durchläufen. Sie hat immer dieselbe Struktur: Startwert → Bedingung → Schritt. Solche Schleifen kommen in fast jedem Programm vor – zum Durchlaufen von Arrays, Ausgabe von Tabellen oder n-fachen Berechnungen.
-
-Codebeispiel (HotWheels.java) – aufwärts zählen:
-
-[CODE]
-public class HotWheels {
-    public static void main( String[] args ) {
-        int i = 1;
-
-        while ( i <= 10 ) {
-            System.out.println("Auto Nummer: " + i);
-            i = i + 1;
+            System.out.println("Zahl: " + zahl);
+            zahl = zahl + 1; // Wichtig: Aktualisierung!
         }
     }
 }
 [/CODE]
 
-Codebeispiel (Countdown.java) – abwärts zählen:
+<b>Kapitel 20 – Zählschleifen</b>
 
-[CODE]
-public class Countdown {
-    public static void main( String[] args ) {
-        int i = 10;
-
-        while ( i >= 1 ) {
-            System.out.println(i + "...");
-            i = i - 1;
-        }
-        System.out.println("Start!");
-    }
-}
-[/CODE]
-
-Codebeispiel (SumLoop.java) – Summe von 1 bis 100:
+Zählschleifen laufen eine festgelegte Anzahl oft durch.
 
 [CODE]
 public class SumLoop {
     public static void main( String[] args ) {
         int summe = 0;
-        int i     = 1;
-
+        int i = 1;
         while ( i <= 100 ) {
             summe = summe + i;
-            i     = i + 1;
+            i = i + 1;
         }
-
         System.out.println("Summe 1 bis 100: " + summe); // 5050
     }
 }
 [/CODE]
 
-Erklärung zum Code:
+<b>Kapitel 21 – Verschachtelte Schleifen</b>
 
-summe startet bei 0 und wird in jedem Durchlauf um den aktuellen Wert von i erhöht. i läuft von 1 bis 100. Nach dem letzten Durchlauf ist i = 101, die Bedingung i <= 100 wird false und die Schleife endet.
-Merksatz – Off-by-one-Fehler:
-Ein sehr häufiger Fehler ist, einen Durchlauf zu viel oder zu wenig zu machen, z.B. i <= 10 vs. i < 10. Bei i <= 10 sind es 10 Durchläufe (1–10), bei i < 10 nur 9 (1–9). Diesen Fehler nennt man Off-by-one-Error und er tritt sehr häufig in Klausuren und echten Projekten auf.
-
-
-
-
-
-
-Kapitel 21 – Verschachtelte Schleifen und ifs
-
-Manchmal muss eine Schleife selbst wieder eine Schleife enthalten – das nennt sich verschachtelte Schleife. Die innere Schleife wird bei jedem Durchlauf der äußeren Schleife komplett neu ausgeführt. Das ist z.B. nötig für Tabellen, Muster oder wenn man jede Kombination zweier Listen durchgehen will. Außerdem lassen sich if-Abfragen direkt innerhalb von Schleifen einbauen, um nur bestimmte Werte zu verarbeiten.
-
-Codebeispiel (PyramidTester.java) – Sternpyramide:
+Eine Schleife innerhalb einer anderen Schleife. Die innere Schleife läuft bei jedem Durchlauf der äußeren komplett neu ab.
 
 [CODE]
-public class PyramidTester {
+public class Pyramid {
     public static void main( String[] args ) {
-        int zeilen = 5;
         int i = 1;
-
-        while ( i <= zeilen ) {
+        while ( i <= 5 ) {
             int j = 1;
             while ( j <= i ) {
                 System.out.print("* ");
-                j = j + 1;
+                j++;
             }
-            System.out.println(); // Zeilenumbruch nach jeder Zeile
-            i = i + 1;
+            System.out.println();
+            i++;
         }
     }
 }
 [/CODE]
 
-Ausgabe:
+<b>Kapitel 22 – Schleifen mit Wächterwert (Sentinel)</b>
 
-*
-* *
-* * *
-* * * *
-* * * * *
+Wird verwendet, wenn die Anzahl der Eingaben unbekannt ist. Ein Sonderwert (z.B. -1) beendet die Schleife.
 
-Erklärung zum Code:
-Die äußere Schleife zählt die Zeilen (1 bis 5). Die innere Schleife gibt in Zeile i genau i Sterne aus. Für jede neue Zeile startet j wieder bei 1. Man erkennt: In Zeile 3 durchläuft die innere Schleife 3 Mal → 3 Sterne.
-
-Codebeispiel (HotHouse.java) – if in Schleife:
-
-[CODE]
-public class HotHouse {
-    public static void main( String[] args ) {
-        int i = 1;
-
-        while ( i <= 20 ) {
-            if ( i % 2 == 0 ) {
-                System.out.println(i + " ist gerade.");
-            }
-            i = i + 1;
-        }
-    }
-}
-[/CODE]
-
-Erklärung zum Code:
-
-Die Schleife geht von 1 bis 20. Das if prüft in jedem Durchlauf, ob i gerade ist (Modulo-Rest ist 0). Nur dann wird die Ausgabe ausgeführt – ungerade Zahlen werden übersprungen.
-Merksatz:
-Bei verschachtelten Schleifen mit n × m Durchläufen steigt die Laufzeit schnell. Eine äußere Schleife mit 100 Durchläufen und eine innere mit 100 Durchläufen ergeben bereits 10.000 Schritte – das ist bei großen Datenmengen relevant.
-
-Typische Fehler:
-
-•	Zählvariable der inneren Schleife vergessen zurückzusetzen (bei while-Schleifen).
-
-•	Falsche Einrückung → unklar welche Anweisungen zur inneren oder äußeren Schleife gehören.
-
-
-
-
-
-
-Kapitel 22 – Schleifen mit Wächterwert (Sentinel)
-
-
-Manchmal weiß man vorher nicht, wie viele Werte eingegeben werden. Dann verwendet man einen Wächterwert (Sentinel): einen speziellen Wert, der das Ende der Eingabe signalisiert, z.B. -1 oder 0. Die Schleife läuft so lange, bis dieser Wert auftaucht.
-
-Das Muster sieht immer gleich aus:
-
-1.	Ersten Wert vor der Schleife einlesen (sogenannte „Priming Read").
-
-2.	Schleife läuft, solange der Wert nicht der Sentinel ist.
-
-3.	Am Ende des Schleifenkörpers nächsten Wert einlesen.
-
-Codebeispiel (CookieChecker.java):
+<b>Wichtig:</b> Priming Read (Eingabe vor der Schleife).
 
 [CODE]
 import java.util.Scanner;
 
-public class CookieChecker {
+public class SentinelLoop {
     public static void main( String[] args ) {
-        Scanner scanner = new Scanner(System.in);
-        int gesamtKalorien = 0;
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Zahl (-1 zum Ende): ");
+        int n = scan.nextInt();
 
-        System.out.print("Kalorien eingeben (-1 zum Beenden): ");
-        int kalorien = scanner.nextInt();
-
-        while ( kalorien != -1 ) {
-            gesamtKalorien = gesamtKalorien + kalorien;
-            System.out.print("Nächste Kalorien (-1 zum Beenden): ");
-            kalorien = scanner.nextInt();
-        }
-
-        System.out.println("Gesamtkalorien: " + gesamtKalorien);
-    }
-}
-[/CODE]
-
-Erklärung zum Code:
-
-Der erste nextInt()-Aufruf vor der Schleife liest den ersten Wert ein – das ist wichtig, damit die Bedingung beim ersten Prüfen schon einen gültigen Wert hat. Gibt der Benutzer sofort -1 ein, wird der Schleifenkörper kein einziges Mal ausgeführt. Das ist korrekt, weil -1 als „keine Daten" interpretiert wird.
-
-Weiteres Beispiel (RenterChecker.java) – Sentinel mit Summe und Zähler:
-
-[CODE]
-import java.util.Scanner;
-
-public class RenterChecker {
-    public static void main( String[] args ) {
-        Scanner scanner = new Scanner(System.in);
-        int summe  = 0;
-        int anzahl = 0;
-
-        System.out.print("Miete eingeben (0 = Ende): ");
-        int miete = scanner.nextInt();
-
-        while ( miete != 0 ) {
-            summe  = summe + miete;
-            anzahl = anzahl + 1;
-            System.out.print("Nächste Miete (0 = Ende): ");
-            miete = scanner.nextInt();
-        }
-
-        if ( anzahl > 0 ) {
-            System.out.println("Durchschnittsmiete: " + (summe / anzahl));
-        } else {
-            System.out.println("Keine Daten eingegeben.");
+        while ( n != -1 ) {
+            System.out.println("Quadrat: " + (n * n));
+            System.out.print("Nächste Zahl: ");
+            n = scan.nextInt();
         }
     }
 }
 [/CODE]
 
-Merksatz:
+<b>Kapitel 23 – Ergebnisgesteuerte Schleifen</b>
 
-•	Sentinel-Muster = Schleife ohne vorher bekannte Anzahl, Abbruch durch Sonderwert.
-
-•	Priming Read (erste Eingabe vor der Schleife) ist zwingend nötig.
-
-•	Wächterwert muss ein Wert sein, der als echter Datenwert niemals vorkommen kann.
-
-Typische Fehler:
-
-•	Erste Eingabe fehlt vor der Schleife → Variable nicht initialisiert, Compilerfehler.
-
-•	Zweite Eingabe am Ende des Schleifenkörpers vergessen → Endlosschleife.
-
-•	Sentinel-Wert kann als echter Datenwert vorkommen → logischer Fehler.
-
-
-
-
-
-
-Kapitel 23 – Ergebnisgesteuerte Schleifen
-
-Bei ergebnisgesteuerten Schleifen ist das Abbruchkriterium kein Eingabe-Wächterwert, sondern ein berechnetes Ergebnis – z.B. „Wiederhole so lange, bis die Näherung genau genug ist" oder „Wiederhole bis das Kapital eine Million überschreitet". Diese Art von Schleifen ist typisch für numerische Algorithmen und Simulationen.
-
-Codebeispiel (MillionDollarYears.java) – Wie viele Jahre bis zur Million?
+Die Schleife läuft, bis ein berechnetes Ziel erreicht ist (z.B. Zinseszins).
 
 [CODE]
-public class MillionDollarYears {
+public class Investment {
     public static void main( String[] args ) {
-        double kapital  = 1000.0;
-        double zinssatz = 0.05; // 5%
-        int    jahre    = 0;
-
-        while ( kapital < 1000000.0 ) {
-            kapital = kapital + kapital * zinssatz;
-            jahre   = jahre + 1;
+        double kapital = 1000.0;
+        int jahre = 0;
+        while ( kapital < 2000.0 ) {
+            kapital *= 1.05; // 5% Zinsen
+            jahre++;
         }
-
-        System.out.println("Jahre bis zur Million: " + jahre);
-        System.out.printf("Endkapital: %.2f Euro%n", kapital);
+        System.out.println("Verdoppelt nach " + jahre + " Jahren.");
     }
 }
 [/CODE]
 
-Erklärung zum Code:
+<b>Kapitel 24 – Die for-Schleife</b>
 
-Die Schleife läuft so lange, bis kapital die Marke von einer Million erreicht oder überschreitet. Weder die Anzahl der Durchläufe noch ein Benutzerwert steuern das Ende – allein das Berechnungsergebnis entscheidet. Das Kapital wächst durch Zinseszins in jedem Schritt um 5%.
-
-Codebeispiel (SquareRootTwo.java) – Näherung der Quadratwurzel (Newton-Verfahren):
+Die <b>for-Schleife</b> ist die kompakte Form der Zählschleife: <i>for(Initialisierung; Bedingung; Aktualisierung)</i>.
 
 [CODE]
-public class SquareRootTwo {
-    public static void main( String[] args ) {
-        double ziel      = 2.0;
-        double naehrung  = 1.0;
-        double genauigkeit = 1.0e-10; // 0.0000000001
-
-        while ( Math.abs(naehrung * naehrung - ziel) > genauigkeit ) {
-            naehrung = (naehrung + ziel / naehrung) / 2.0;
-        }
-
-        System.out.println("Näherung √2 = " + naehrung);
-        System.out.println("Kontrolle:    " + Math.sqrt(2.0));
-    }
-}
-[/CODE]
-
-Erklärung zum Code:
-
-Das Newton-Verfahren verbessert die Näherung für √2 schrittweise. Die Schleife bricht ab, wenn die Abweichung kleiner als 1.0e-10 ist. Math.abs() liefert den Absolutbetrag, damit negative Abweichungen genauso behandelt werden wie positive. Das ist ein klassisches Beispiel für einen numerischen Algorithmus.
-
-Merksatz:
-
-•	Ergebnisgesteuerte Schleife = Abbruch sobald ein Zielwert erreicht ist.
-
-•	Typische Anwendungen: Zinsberechnungen, Näherungsverfahren, Simulationen.
-
-•	Immer prüfen: Kann das Ziel überhaupt erreicht werden? Sonst Endlosschleife.
-
-Typische Fehler:
-
-•	Abbruchbedingung nie erreichbar → Endlosschleife (z.B. Zinssatz = 0, Kapital wächst nie).
-
-•	Genauigkeitsgrenze zu klein für float → Schleife endet nie wegen Rundungsfehlern. Immer double verwenden.
-
-
-
-
-
-
-
-
-
-
-Kapitel 24 – Die for-Schleife
-
-
-Die for-Schleife ist eine kompakte Schreibweise für Zählschleifen. Alle drei Bestandteile (Initialisierung, Bedingung, Aktualisierung) stehen in einer einzigen Zeile im Schleifenkopf. Das macht den Code übersichtlicher und weniger fehleranfällig als die entsprechende while-Schleife.
-
-Aufbau:
-
-[CODE]
-for ( Initialisierung; Bedingung; Aktualisierung ) {
-    // Schleifenkörper
-}
-Vergleich while vs. for – dasselbe Ergebnis:
-java
-// while-Version:
-int i = 1;
-while ( i <= 5 ) {
-    System.out.println(i);
-    i = i + 1;
-}
-
-// for-Version (kompakter, bevorzugt):
-
-for ( int i = 1; i <= 5; i++ ) {
-    System.out.println(i);
-}
-[/CODE]
-
-Codebeispiel (TaxGouge.java) – Steuertabelle:
-
-[CODE]
-public class TaxGouge {
-    public static void main( String[] args ) {
-        System.out.printf("%-10s %10s%n", "Einkommen", "Steuer (30%)");
-        System.out.println("------------------------");
-
-        for ( int einkommen = 10000; einkommen <= 50000; einkommen += 10000 ) {
-            double steuer = einkommen * 0.30;
-            System.out.printf("%-10d %10.2f%n", einkommen, steuer);
-        }
-    }
-}
-[/CODE]
-
-Ausgabe:
-
-Einkommen   Steuer (30%)
-------------------------
-10000         3000.00
-20000         6000.00
-30000         9000.00
-40000        12000.00
-50000        15000.00
-
-Erklärung zum Code:
-
-einkommen += 10000 ist eine Kurzform für einkommen = einkommen + 10000. Die Schleife startet bei 10.000 und erhöht den Wert in jedem Schritt um 10.000, bis 50.000 überschritten wird. Die Zählvariable einkommen ist nur innerhalb der Schleife gültig (lokaler Gültigkeitsbereich).
-
-Codebeispiel (EvalPoly.java) – Polynom berechnen:
-
-[CODE]
-public class EvalPoly {
-    public static void main( String[] args ) {
-        // Berechne: 2x^2 + 3x + 1 für x = 0 bis 5
-        for ( int x = 0; x <= 5; x++ ) {
-            int ergebnis = 2 * x * x + 3 * x + 1;
-            System.out.println("x = " + x + " → " + ergebnis);
-        }
-    }
-}
-[/CODE]
-
-Ausgabe:
-
-x = 0 → 1
-x = 1 → 6
-x = 2 → 15
-x = 3 → 28
-x = 4 → 45
-x = 5 → 66
-
-Codebeispiel (PrimeTester.java) – Primzahlen prüfen:
-
-[CODE]
-public class PrimeTester {
-    public static void main( String[] args ) {
-        int zahl    = 29;
-        boolean prim = true;
-
-        for ( int teiler = 2; teiler < zahl; teiler++ ) {
-            if ( zahl % teiler == 0 ) {
-                prim = false;
-            }
-        }
-
-        if ( prim ) {
-            System.out.println(zahl + " ist eine Primzahl.");
-        } else {
-            System.out.println(zahl + " ist keine Primzahl.");
-        }
-    }
-}
-[/CODE]
-
-Erklärung zum Code:
-
-Die for-Schleife prüft alle möglichen Teiler von 2 bis zahl - 1. Findet sie einen Teiler (Rest = 0), setzt sie prim auf false. Nach der Schleife wird das Ergebnis ausgegeben. Das ist ein einfacher, aber vollständig korrekter Primzahltest.
-
-Wann for, wann while?
-
-Situation				Schleife
-
-Anzahl der Durchläufe bekannt		for
-Unbekannte Anzahl, Bedingung wichtig	while
-Sentinel oder ergebnisgesteuert		while
-Array durchlaufen			for (oder for-each)
-
-Typische Fehler:
-
-•	Semikolon nach dem Schleifenkopf: for (int i = 0; i < 5; i++); → leere Schleife, der Block danach wird nur einmal ausgeführt.
-
-•	Zählvariable nach der Schleife verwenden → Compilerfehler, weil sie nur im Schleifenkopf deklariert wurde.
-
-•	i++ vergessen → Endlosschleife.
-
-
-
-
-
-
-Kapitel 25 – Weitere Aspekte der for-Schleife
-
-
-Die for-Schleife ist flexibler als es auf den ersten Blick aussieht. Im Schleifenkopf können mehrere Variablen initialisiert, mehrere Aktualisierungen durchgeführt und beliebige Schrittweiten verwendet werden. Wichtig ist jedoch: Lesbarkeit geht vor Cleverness. Zu komplexe for-Köpfe sind schwer zu verstehen und zu warten.
-Variante 1 – Schrittweite größer als 1:
-
-[CODE]
-// Jede zweite Zahl von 0 bis 20
-for ( int i = 0; i <= 20; i += 2 ) {
-    System.out.print(i + " ");
-}
-// Ausgabe: 0 2 4 6 8 10 12 14 16 18 20
-Variante 2 – Rückwärts zählen:
-java
-for ( int i = 10; i >= 1; i-- ) {
-    System.out.print(i + " ");
-}
-// Ausgabe: 10 9 8 7 6 5 4 3 2 1
-[/CODE]
-
-Codebeispiel (EvalPolyTwo.java) – zwei Variablen im Schleifenkopf:
-
-[CODE]
-public class EvalPolyTwo {
-    public static void main( String[] args ) {
-        // x zählt aufwärts, y zählt abwärts – gleichzeitig
-        for ( int x = 0, y = 10; x <= 10; x++, y-- ) {
-            System.out.println("x = " + x + ", y = " + y);
-        }
-    }
-}
-[/CODE]
-
-Ausgabe (Auszug):
-
-x = 0, y = 10
-x = 1, y = 9
-x = 2, y = 8
-...
-x = 10, y = 0
-
-Erklärung zum Code:
-
-Im Initialisierungsteil werden x und y mit Komma getrennt gleichzeitig deklariert. Im Aktualisierungsteil werden beide gleichzeitig verändert: x++ erhöht, y-- verringert. Beide müssen denselben Typ haben, wenn sie zusammen deklariert werden.
-
-Codebeispiel (Countdown.java) – for statt while für Countdown:
-
-[CODE]
-public class Countdown {
-    public static void main( String[] args ) {
-        for ( int i = 10; i >= 1; i-- ) {
-            System.out.println(i + "...");
-        }
-        System.out.println("Start!");
-    }
-}
-[/CODE]
-
-Codebeispiel – verschachtelte for-Schleifen (Multiplikationstabelle):
-
-[CODE]
-public class MultiplicationTable {
+public class ForLoop {
     public static void main( String[] args ) {
         for ( int i = 1; i <= 5; i++ ) {
-            for ( int j = 1; j <= 5; j++ ) {
-                System.out.printf("%4d", i * j);
+            System.out.println("i = " + i);
+        }
+    }
+}
+[/CODE]
+
+<b>Kapitel 25 – Weitere Aspekte der for-Schleife</b>
+
+• <b>Rückwärts zählen:</b> <i>for(int i=10; i>=1; i--)</i>
+• <b>Schrittweite ändern:</b> <i>i += 2</i>
+• <b>Verschachtelte for-Schleifen:</b>
+
+[CODE]
+public class Table {
+    public static void main( String[] args ) {
+        for ( int i = 1; i <= 3; i++ ) {
+            for ( int j = 1; j <= 3; j++ ) {
+                System.out.print(i * j + "	");
             }
             System.out.println();
         }
@@ -789,54 +192,6 @@ public class MultiplicationTable {
 }
 [/CODE]
 
-Ausgabe:
-
-   1   2   3   4   5
-   2   4   6   8  10
-   3   6   9  12  15
-   4   8  12  16  20
-   5  10  15  20  25
-
-Erklärung zum Code:
-
-Die äußere Schleife wählt die Zeile (i), die innere die Spalte (j). %4d sorgt für gleichmäßige Spaltenbreite. Nach jeder Zeile erzeugt System.out.println() den Zeilenumbruch. Verschachtelte for-Schleifen sind das Standardwerkzeug für zweidimensionale Strukturen wie Tabellen, Matrizen oder 2D-Arrays.
-Leere Teile im Schleifenkopf:
-
-Alle drei Teile des for-Kopfes sind optional. Eine for-Schleife ohne alle drei Teile ist eine Endlosschleife:
-
-[CODE]
-for ( ; ; ) {
-    // läuft ewig – entspricht while(true)
-    // Abbruch nur mit break oder return
-}
-[/CODE]
-
-Das wird in der Praxis selten genutzt, aber du solltest es kennen, wenn du fremden Code liest.
-
-Goldene Regel – for vs. while:
-
-Kennst du die Anzahl der Durchläufe im Voraus?
-
-→ JA  → for-Schleife
-→ NEIN → while-Schleife
-
-Typische Fehler:
-
-•	Komma statt Semikolon im Schleifenkopf: for (int i = 0, i < 5, i++) → Compilerfehler. Zwischen den drei Teilen stehen immer Semikolons.
-
-•	Schleifenvariable im falschen Teil: Initialisierung im Körper vergessen → Variable nicht im Schleifenkopf sichtbar.
-
-•	Überkomplexer Schleifenkopf mit drei Variablen und komplizierten Ausdrücken → schwer wartbar, lieber in den Körper auslagern.
-
-
-[CODE]
-for ( int i = 0; i < 4; i++ ) {
-    for ( int j = 0; j < 4; j++ ) {
-        System.out.print("# ");
-    }
-    System.out.println();
-}
-[/CODE]
-
-
-
+<b>Goldene Regel:</b>
+• Anzahl bekannt? → <b>for</b>
+• Anzahl unbekannt? → <b>while</b>
