@@ -1,11 +1,10 @@
-PART 12 – Sortieralgorithmen
-(Kap. 110–112)
+<b>Part 12: Sortieralgorithmen (Kapitel 110-112)</b>
 
-Selection Sort:
-• Suche kleinstes Element im unsortierten Teil
-• Tausche mit erstem unsortierten Element
-• Wiederhole bis alles sortiert
-• Laufzeit: O(n²)
+In diesem Teil lernst du verschiedene Methoden kennen, um Daten in Arrays zu sortieren, und wie du die eingebaute Sortierfunktion von Java nutzt.
+
+<b>1. Selection Sort (Kapitel 110)</b>
+Beim Selection Sort wird wiederholt das kleinste Element aus dem unsortierten Teil gesucht und an den Anfang getauscht.
+- <code>Laufzeit:</code> O(n²) - quadratisch, da zwei verschachtelte Schleifen verwendet werden.
 [CODE]
 for (int i = 0; i < array.length - 1; i++) {
     int minIndex = i;
@@ -15,20 +14,19 @@ for (int i = 0; i < array.length - 1; i++) {
         }
     }
     // Tausch
-    int temp       = array[minIndex];
+    int temp = array[minIndex];
     array[minIndex] = array[i];
-    array[i]       = temp;
+    array[i] = temp;
 }
 [/CODE]
 
-Insertion Sort:
-• Nimm nächstes Element, füge an richtiger Stelle ein
-• Wie Karten sortieren in der Hand
-• Laufzeit: O(n²), gut bei fast sortierten Daten
+<b>2. Insertion Sort (Kapitel 111)</b>
+Insertion Sort fügt jedes Element an der richtigen Stelle im bereits sortierten Teil ein (ähnlich wie beim Sortieren von Spielkarten).
+- <code>Laufzeit:</code> O(n²), aber sehr effizient bei fast sortierten Daten.
 [CODE]
 for (int i = 1; i < array.length; i++) {
     int key = array[i];
-    int j   = i - 1;
+    int j = i - 1;
     while (j >= 0 && array[j] > key) {
         array[j + 1] = array[j];
         j--;
@@ -37,23 +35,22 @@ for (int i = 1; i < array.length; i++) {
 }
 [/CODE]
 
-Arrays.sort() – eingebaut (empfohlen!):
+<b>3. Arrays.sort() und Objekte (Kapitel 112)</b>
+Java bietet mit <code>Arrays.sort()</code> eine hocheffiziente eingebaute Methode zum Sortieren.
+- <code>Primitive Typen:</code> Sortiert Zahlen aufsteigend.
+- <code>Strings:</code> Sortiert lexikographisch (alphabetisch).
+- <code>Eigene Objekte:</code> Die Klasse muss das Interface <code>Comparable</code> implementieren und die Methode <code>compareTo()</code> definieren.
 [CODE]
 import java.util.Arrays;
+
+// Einfache Arrays
 int[] zahlen = {5, 2, 8, 1};
-Arrays.sort(zahlen); // → {1, 2, 5, 8}
+Arrays.sort(zahlen);
 
-String[] namen = {"Zara", "Anna", "Max"};
-Arrays.sort(namen); // → alphabetisch
-
-// Objekte sortieren (Comparable nötig):
-Arrays.sort(buecher);
+// Objekte sortieren
+String[] namen = {"Zora", "Anna", "Max"};
+Arrays.sort(namen);
 [/CODE]
 
-Merksatz:
-• Selection/Insertion Sort: O(n²) – für Lernzwecke
-• Arrays.sort(): O(n log n)  – immer in der Praxis verwenden
-• Strings vergleichen: compareTo() intern genutzt
-
-Dateien: BoxSort.java, InsertionSortTester.java,
-         ArraysTester.java, Book.java
+<b>Merksatz:</b>
+Nutze für produktive Anwendungen immer <code>Arrays.sort()</code>, da es optimiert und deutlich schneller als einfache Sortieralgorithmen wie Selection Sort ist.
