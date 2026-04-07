@@ -7,7 +7,7 @@ Jede rekursive Methode benötigt zwei essenzielle Bestandteile:
 - <b>Basisfall (Base Case):</b> Eine einfache Situation, die ohne weiteren Selbstaufruf sofort gelöst werden kann.
 - <b>Rekursiver Schritt:</b> Die Methode ruft sich selbst mit einem verkleinerten Problem auf.
 
-<i>Hinweis:</i> Ohne einen erreichbaren Basisfall kommt es zur Endlos-Rekursion und einem <code>StackOverflowError</code>.
+<b>Hinweis:</b> Ohne einen erreichbaren Basisfall kommt es zur Endlos-Rekursion und einem <code>StackOverflowError</code>.
 
 <b>2. Mathematische Beispiele (Kapitel 91-93)</b>
 
@@ -30,8 +30,8 @@ public int factorial(int n) {
 <b>Fibonacci-Zahlen:</b>
 [CODE]
 public int fib(int n) {
-    if (n == 1) return 1; 
-    else if (n == 2) return 1; 
+    if (n == 1) return 1;
+    else if (n == 2) return 1;
     else return fib(n - 1) + fib(n - 2);
 }
 [/CODE]
@@ -47,20 +47,8 @@ public String reverse(String str) {
 }
 [/CODE]
 
-<b>Palindrom prüfen:</b>
-[CODE]
-public boolean istPalindrom(String s) {
-    if (s.length() <= 1) return true;
-    if (s.charAt(0) != s.charAt(s.length() - 1)) return false;
-    return istPalindrom(s.substring(1, s.length() - 1));
-}
-[/CODE]
-
-<b>4. Rekursive Grafik & Fraktale (Kapitel 95-96)</b>
-Rekursion wird oft genutzt, um komplexe Muster (Fraktale) zu zeichnen.
-- <b>Sierpinski-Dreieck:</b> Ein großes Dreieck, das rekursiv in immer kleinere Dreiecke unterteilt wird.
-- <b>Koch-Schneeflocke:</b> Entsteht durch rekursive Ersetzung von Liniensegmenten.
-Die <i>Tiefe</i> der Rekursion bestimmt, wie viele Details sichtbar sind.
+<b>4. Grafik & Fraktale (Kapitel 95-96)</b>
+Rekursion ist ideal, um komplexe, sich wiederholende Muster zu zeichnen, wie z.B. <b>Bäume</b> oder <b>Fraktale</b> (Sierpinski-Dreieck).
 
 <b>Merksatz:</b>
-Jeder rekursive Aufruf muss das Problem so verkleinern, dass sichergestellt ist, dass der Basisfall irgendwann erreicht wird.
+Eine gute Rekursion braucht immer einen erreichbaren Basisfall, um eine Endlosschleife zu verhindern.
