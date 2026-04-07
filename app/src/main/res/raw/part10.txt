@@ -10,45 +10,23 @@ Jede rekursive Methode benötigt zwei essenzielle Bestandteile:
 <b>Hinweis:</b> Ohne einen erreichbaren Basisfall kommt es zur Endlos-Rekursion und einem <code>StackOverflowError</code>.
 
 <b>2. Mathematische Beispiele (Kapitel 91-93)</b>
-
-<b>Dreieckszahlen:</b>
 [CODE]
+// Dreieckszahlen
 public int triangle(int n) {
     if (n == 1) return 1; // Basisfall
     else return n + triangle(n - 1); // Rekursiver Schritt
 }
-[/CODE]
 
-<b>Fakultät (n!):</b>
-[CODE]
+// Fakultät (n!)
 public int factorial(int n) {
     if (n == 0) return 1; // Basisfall
-    else return n * factorial(n - 1); // Rekursiver Schritt
+    else return n * factorial(n - 1);
 }
 [/CODE]
 
-<b>Fibonacci-Zahlen:</b>
-[CODE]
-public int fib(int n) {
-    if (n == 1) return 1;
-    else if (n == 2) return 1;
-    else return fib(n - 1) + fib(n - 2);
-}
-[/CODE]
-
-<b>3. Rekursion mit Strings (Kapitel 94)</b>
-Strings lassen sich rekursiv verarbeiten, indem man sie in den ersten Buchstaben und den "Rest" (Tail) zerlegt.
-
-<b>String umkehren:</b>
-[CODE]
-public String reverse(String str) {
-    if (str.length() <= 1) return str;
-    return reverse(str.substring(1)) + str.charAt(0);
-}
-[/CODE]
-
-<b>4. Grafik & Fraktale (Kapitel 95-96)</b>
-Rekursion ist ideal, um komplexe, sich wiederholende Muster zu zeichnen, wie z.B. <b>Bäume</b> oder <b>Fraktale</b> (Sierpinski-Dreieck).
+<b>3. Rekursion mit Strings und Grafik (Kapitel 94-96)</b>
+- <b>Strings:</b> Rekursion eignet sich hervorragend, um Texte zu verarbeiten (z.B. Umkehren eines Strings).
+- <b>Grafik & Fraktale:</b> Selbstähnliche Strukturen wie der Sierpinski-Teppich oder Fraktal-Bäume lassen sich elegant mit Rekursion zeichnen, indem eine Methode Teilfiguren von sich selbst zeichnet.
 
 <b>Merksatz:</b>
-Eine gute Rekursion braucht immer einen erreichbaren Basisfall, um eine Endlosschleife zu verhindern.
+Rekursion ist oft eleganter und kürzer als eine Schleife (Iteration), kann aber bei sehr vielen Aufrufen den Speicher (Stack) überlasten. Nutze Rekursion vor allem dann, wenn sich ein Problem natürlich in kleinere Teilprobleme zerlegen lässt.
