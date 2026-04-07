@@ -1,10 +1,9 @@
 <b>Part 8: Datei-Ein- und Ausgabe (Kapitel 70-73)</b>
 
-In diesem Teil lernen wir, wie man Daten dauerhaft in Textdateien speichert und wieder ausliest.
+In diesem Teil lernst du, wie man Daten dauerhaft in Textdateien speichert und wieder ausliest.
 
 <b>1. In Dateien schreiben mit PrintWriter (Kapitel 72)</b>
-Um Text in eine Datei zu schreiben, nutzen wir die Klasse <i>PrintWriter</i>.
-
+Um Text in eine Datei zu schreiben, nutzen wir die Klasse <code>PrintWriter</code>.
 [CODE]
 PrintWriter ausgabe = new PrintWriter("ergebnis.txt");
 ausgabe.println("Das wird in der Datei gespeichert.");
@@ -12,8 +11,7 @@ ausgabe.close(); // WICHTIG: Datei immer schließen!
 [/CODE]
 
 <b>2. Aus Dateien lesen mit Scanner (Kapitel 72)</b>
-Das Lesen funktioniert fast wie die Eingabe über die Tastatur, nur dass wir ein <i>File</i>-Objekt übergeben.
-
+Das Lesen funktioniert fast wie die Eingabe über die Tastatur, nur dass wir ein <code>File</code>-Objekt übergeben.
 [CODE]
 Scanner scan = new Scanner(new File("daten.txt"));
 while (scan.hasNextLine()) {
@@ -23,11 +21,14 @@ while (scan.hasNextLine()) {
 scan.close();
 [/CODE]
 
-<b>3. Wichtige Techniken (Kapitel 73)</b>
-Beim Lesen von Dateien gibt es verschiedene Strategien:
+<b>3. Wichtige Techniken beim Lesen (Kapitel 73)</b>
+Es gibt verschiedene Strategien, um das Ende einer Datei zu erkennen oder Datenmengen zu verarbeiten:
 - <b>Zählschleife:</b> Die erste Zahl in der Datei gibt an, wie viele Werte folgen.
 - <b>Sentinel-Wert:</b> Ein spezieller Wert (z.B. -1) markiert das Ende der Daten.
-- <b>hasNext-Prüfung:</b> Die Schleife läuft so lange, wie noch Daten in der Datei vorhanden sind (<i>hasNextInt()</i>, <i>hasNextDouble()</i>).
+- <b>hasNext-Prüfung:</b> Die Schleife läuft so lange, wie noch Daten vorhanden sind (<code>hasNextInt()</code>, <code>hasNextDouble()</code>).
 
-<b>4. Ausnahmen (Exceptions)</b>
-Da beim Zugriff auf Dateien Fehler auftreten können (z.B. Datei nicht gefunden), muss die <i>main</i>-Methode oft mit <i>throws IOException</i> markiert werden.
+<b>4. Exceptions (Ausnahmen)</b>
+Da beim Zugriff auf Dateien Fehler auftreten können (z.B. Datei nicht gefunden), muss die <code>main</code>-Methode oft mit <code>throws IOException</code> markiert werden oder der Code in einen <code>try-catch</code> Block gefasst werden.
+
+<b>Merksatz:</b>
+Vergiss niemals <code>.close()</code>! Ohne diesen Befehl werden die Daten oft nicht physisch auf die Festplatte geschrieben und der Speicher bleibt belegt.
