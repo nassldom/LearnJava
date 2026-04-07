@@ -1,73 +1,43 @@
-PART 9 – Fortgeschrittene OOP
-(Kap. 80–86)
+<b>Part 9: Fortgeschrittene OOP (Kapitel 80-86)</b>
 
-Vererbung (extends):
+In diesem Teil vertiefen wir die Objektorientierung mit Vererbung, Interfaces und dynamischen Listen.
+
+<b>1. Vererbung (Kapitel 80)</b>
+Klassen können Eigenschaften von anderen Klassen erben (<i>extends</i>). Die Unterklasse übernimmt alles von der Oberklasse und kann Neues hinzufügen.
+
 [CODE]
-public class Toy extends Goods {
-    public Toy(String des, double pr) {
-        super(des, pr); // Eltern-Konstruktor
-    }
+class Tier {
+    void fressen() { System.out.println("Mampf..."); }
+}
+
+class Hund extends Tier {
+    void bellen() { System.out.println("Wuff!"); }
+}
+[/CODE]
+- <b>super:</b> Greift auf den Konstruktor oder Methoden der Oberklasse zu.
+
+<b>2. Abstrakte Klassen & Polymorphie (Kapitel 81)</b>
+Eine <b>abstrakte Klasse</b> kann nicht instanziiert werden (kein <i>new</i>). Sie dient als Schablone für andere Klassen.
+<b>Polymorphie</b> (Vielgestaltigkeit) erlaubt es, ein Objekt der Unterklasse wie ein Objekt der Oberklasse zu behandeln.
+
+<b>3. Interfaces (Kapitel 83)</b>
+Ein Interface ist ein Vertrag. Klassen, die ein Interface implementieren (<i>implements</i>), müssen die vorgegebenen Methoden definieren.
+
+[CODE]
+interface Spielbar {
+    void spielen();
 }
 [/CODE]
 
-Abstract Class:
-[CODE]
-public abstract class Shape {
-    public abstract double area(); // muss überschrieben werden
-    public void print() {
-        System.out.println("Fläche: " + area());
-    }
-}
-// new Shape() → FEHLER! Kann nicht instanziiert werden.
-[/CODE]
+<b>4. ArrayLists (Kapitel 85)</b>
+Im Gegensatz zu Arrays können <i>ArrayLists</i> ihre Größe dynamisch ändern. Sie sind sehr flexibel.
 
-Interface:
 [CODE]
-public interface Taxable {
-    double TAXRATE = 0.06; // automatisch public static final
-    double calculateTax(); // automatisch public abstract
-}
-
-public class Toy extends Goods implements Taxable {
-    public double calculateTax() {
-        return price * TAXRATE;
-    }
-}
-[/CODE]
-
-Interface als Typ:
-[CODE]
-Taxable item = new Toy("Ball", 5.00);
-System.out.println(item.calculateTax()); // 0.30
-[/CODE]
-
-Comparable:
-[CODE]
-public class Book implements Comparable<Book> {
-    public int compareTo(Book other) {
-        return this.title.compareTo(other.title);
-    }
-}
-[/CODE]
-
-ArrayList:
-[CODE]
-import java.util.*;
 ArrayList<String> liste = new ArrayList<>();
-liste.add("Anna");
-liste.add("Bob");
-System.out.println(liste.get(0)); // "Anna"
-liste.remove(0);
-System.out.println(liste.size()); // 1
-Collections.sort(liste);
+liste.add("Java");
+liste.add("Lernen");
+System.out.println(liste.get(0)); // "Java"
 [/CODE]
 
-Iterator:
-[CODE]
-Iterator<String> it = liste.iterator();
-while (it.hasNext()) {
-    System.out.println(it.next());
-}
-[/CODE]
-
-Dateien: VideoStore02.java, CardTester.java, Bird.java, ArrayListEg.java
+<b>5. Comparable Interface (Kapitel 84)</b>
+Wenn du Objekte sortieren möchtest (z.B. nach Preis oder Name), muss die Klasse das <i>Comparable</i>-Interface implementieren.
