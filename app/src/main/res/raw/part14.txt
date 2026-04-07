@@ -3,7 +3,7 @@
 In diesem Teil lernst du die Konzepte von verketteten Listen (Linked Lists) kennen – eine dynamische Datenstruktur, die im Gegensatz zu Arrays flexibel wachsen kann.
 
 <b>1. Das Node-Konzept (Kapitel 130)</b>
-Eine Linked List besteht aus einzelnen **Knoten** (Nodes). Jeder Knoten speichert Daten und einen Verweis auf den **nächsten** Knoten.
+Eine Linked List besteht aus einzelnen <b>Knoten</b> (Nodes). Jeder Knoten speichert Daten und einen Verweis auf den <b>nächsten</b> Knoten.
 - <code>Head:</code> Ein Verweis auf den ersten Knoten der Liste. Ist dieser <code>null</code>, ist die Liste leer.
 [CODE]
 public class Node {
@@ -18,9 +18,10 @@ public class Node {
 [/CODE]
 
 <b>2. Listen-Operationen (Kapitel 131-132)</b>
-Das Arbeiten mit Listen erfordert das "Traversieren" (Durchlaufen) der Knotenkette.
-- <code>Einfügen:</code> Neue Knoten werden meist am Anfang oder Ende angehängt.
-- <code>Traversieren:</code> Man startet beim <code>head</code> und folgt den <code>next</code>-Verweisen in einer Schleife.
+Man unterscheidet zwischen unsortierten (unordered) und sortierten (ordered) Listen.
+- <code>Einfügen:</code> Bei unsortierten Listen meist am Anfang (sehr effizient). Bei sortierten Listen wird die passende Stelle gesucht.
+- <code>Löschen:</code> Ein Element wird entfernt, indem der <code>next</code>-Verweis des Vorgängers auf den Nachfolger gesetzt wird.
+- <code>Traversieren:</code> Das Durchlaufen der Liste von <code>head</code> bis zum Ende.
 [CODE]
 Node current = head;
 while (current != null) {
@@ -30,7 +31,7 @@ while (current != null) {
 [/CODE]
 
 <b>3. Generische Listen (Kapitel 133)</b>
-Durch **Generics** kann eine Linked List so programmiert werden, dass sie jeden beliebigen Datentyp (z.B. <code>String</code>, <code>Integer</code>, eigene Objekte) speichern kann.
+Durch <b>Generics</b> kann eine Linked List so programmiert werden, dass sie jeden beliebigen Datentyp (z.B. <code>String</code>, <code>Integer</code>) speichern kann.
 [CODE]
 public class GenericNode<E> {
     E data;
@@ -39,7 +40,7 @@ public class GenericNode<E> {
 }
 
 // Nutzung:
-GenericLinkedList<String> namen = new GenericLinkedList<>();
+GenericLinkedList<String> list = new GenericLinkedList<>();
 [/CODE]
 
 <b>Merksatz:</b>
