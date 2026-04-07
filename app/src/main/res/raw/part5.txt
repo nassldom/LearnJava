@@ -1,1 +1,56 @@
-Erweitere Part 5: Zufall, Operatoren-Kurzformen, Wahrheitstabellen und do-while-Schleifen
+<b>Part 5: Zufall, Operatoren & do-while</b>
+
+In diesem Teil lernen wir weitere nützliche Funktionen von Java kennen, wie man Zufallszahlen generiert, Code effizienter schreibt und Logik besser versteht.
+
+<b>1. Zufallszahlen mit der Random-Klasse (Kapitel 30)</b>
+Um in Java Zufallszahlen zu erzeugen, verwenden wir die <i>Random</i>-Klasse aus dem Paket <i>java.util</i>. Diese ist sehr nützlich für Spiele oder Simulationen.
+
+[CODE]
+import java.util.Random;
+
+Random wuerfel = new Random();
+int ergebnis = wuerfel.nextInt(6) + 1; // Erzeugt eine Zahl von 1 bis 6
+[/CODE]
+
+- <b>nextInt(n):</b> Generiert eine Ganzzahl von 0 bis n-1.
+- <b>nextDouble():</b> Generiert eine Kommazahl zwischen 0.0 und 1.0.
+
+<b>2. Kurzformen von Operatoren (Kapitel 31)</b>
+Oft möchte man eine Variable um 1 erhöhen oder einen Wert auf eine bestehende Variable addieren. Dafür gibt es praktische Kurzschreibweisen:
+
+[CODE]
+int zahl = 10;
+zahl++;     // Inkrement (Erhöht um 1)
+zahl--;     // Dekrement (Verringert um 1)
+zahl += 5;  // Kurzform für: zahl = zahl + 5
+zahl *= 2;  // Kurzform für: zahl = zahl * 2
+[/CODE]
+
+<b>Präfix vs. Postfix:</b>
+<i>++zahl</i> erhöht zuerst den Wert und benutzt ihn dann.
+<i>zahl++</i> benutzt zuerst den alten Wert und erhöht ihn danach.
+
+<b>3. Wahrheitstabellen und Logik (Kapitel 33)</b>
+Logische Ausdrücke können mit <i>&&</i> (UND), <i>||</i> (ODER) und <i>!</i> (NICHT) verknüpft werden.
+- <b>&& (AND):</b> Wahr, wenn beide Bedingungen erfüllt sind.
+- <b>|| (OR):</b> Wahr, wenn mindestens eine Bedingung erfüllt ist.
+- <b>! (NOT):</b> Kehrt den Wahrheitswert um (Wahr -> Falsch, Falsch -> Wahr).
+
+<b>De Morgans Gesetze:</b>
+Diese helfen, komplizierte Logik zu vereinfachen:
+- <i>!(A && B)</i> ist identisch mit <i>!A || !B</i>
+- <i>!(A || B)</i> ist identisch mit <i>!A && !B</i>
+
+<b>4. Die do-while Schleife (Kapitel 35)</b>
+Im Gegensatz zur <i>while</i>-Schleife wird die <i>do-while</i>-Schleife <b>mindestens einmal</b> ausgeführt, da die Bedingung erst am Ende ("fußgesteuert") geprüft wird.
+
+[CODE]
+int zahl;
+Scanner scan = new Scanner(System.in);
+do {
+    System.out.println("Geben Sie eine Zahl ein (0 zum Beenden):");
+    zahl = scan.nextInt();
+} while (zahl != 0);
+[/CODE]
+
+Wichtig: Am Ende der <i>while</i>-Bedingung muss bei <i>do-while</i> zwingend ein <b>Semikolon (;)</b> stehen!
