@@ -3,7 +3,7 @@
 In diesem Teil vertiefen wir die Objektorientierung mit Vererbung, Interfaces und dynamischen Listen.
 
 <b>1. Vererbung (Kapitel 80)</b>
-Klassen können Eigenschaften von anderen Klassen erben (<i>extends</i>). Die Unterklasse übernimmt alles von der Oberklasse und kann Neues hinzufügen.
+Klassen können Eigenschaften von anderen Klassen erben (<code>extends</code>). Die Unterklasse übernimmt alles von der Oberklasse und kann Neues hinzufügen.
 
 [CODE]
 class Tier {
@@ -16,12 +16,12 @@ class Hund extends Tier {
 [/CODE]
 - <b>super:</b> Greift auf den Konstruktor oder Methoden der Oberklasse zu.
 
-<b>2. Abstrakte Klassen & Polymorphie (Kapitel 81)</b>
-Eine <b>abstrakte Klasse</b> kann nicht instanziiert werden (kein <i>new</i>). Sie dient als Schablone für andere Klassen.
-<b>Polymorphie</b> (Vielgestaltigkeit) erlaubt es, ein Objekt der Unterklasse wie ein Objekt der Oberklasse zu behandeln.
+<b>2. Abstrakte Klassen & Polymorphie (Kapitel 81-82)</b>
+Eine <b>abstrakte Klasse</b> kann nicht instanziiert werden (kein <code>new</code>). Sie dient als Schablone für andere Klassen.
+<b>Polymorphie</b> (Vielgestaltigkeit) erlaubt es, ein Objekt der Unterklasse wie ein Objekt der Oberklasse zu behandeln. Dies geschieht durch <b>Dynamic Binding</b>: Erst zur Laufzeit wird entschieden, welche Methode aufgerufen wird.
 
 <b>3. Interfaces (Kapitel 83)</b>
-Ein Interface ist ein Vertrag. Klassen, die ein Interface implementieren (<i>implements</i>), müssen die vorgegebenen Methoden definieren.
+Ein Interface ist ein Vertrag. Klassen, die ein Interface implementieren (<code>implements</code>), müssen die vorgegebenen Methoden definieren.
 
 [CODE]
 interface Spielbar {
@@ -30,7 +30,7 @@ interface Spielbar {
 [/CODE]
 
 <b>4. ArrayLists (Kapitel 85)</b>
-Im Gegensatz zu Arrays können <i>ArrayLists</i> ihre Größe dynamisch ändern. Sie sind sehr flexibel.
+Im Gegensatz zu Arrays können <code>ArrayList</code> ihre Größe dynamisch ändern. Sie sind sehr flexibel.
 
 [CODE]
 ArrayList<String> liste = new ArrayList<>();
@@ -40,4 +40,10 @@ System.out.println(liste.get(0)); // "Java"
 [/CODE]
 
 <b>5. Comparable Interface (Kapitel 84)</b>
-Wenn du Objekte sortieren möchtest (z.B. nach Preis oder Name), muss die Klasse das <i>Comparable</i>-Interface implementieren.
+Wenn du Objekte sortieren möchtest (z.B. nach Preis oder Name), muss die Klasse das <code>Comparable</code>-Interface implementieren.
+
+<b>6. BigInteger (Kapitel 86)</b>
+Für Berechnungen mit extrem großen Zahlen, die den Bereich von <code>long</code> überschreiten, nutzt man die Klasse <code>BigInteger</code>.
+
+<b>Merksatz:</b>
+Polymorphismus ermöglicht es, dass Objekte unterschiedlicher Klassen auf denselben Methodenaufruf unterschiedlich reagieren.
