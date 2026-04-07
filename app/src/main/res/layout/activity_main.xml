@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:background="#F0F4F8">
 
-    <!-- Header / Logo-Bereich mit Java-Logo oben rechts -->
+    <!-- Header / Logo-Bereich -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,6 @@
         android:paddingBottom="20dp"
         android:gravity="center_vertical">
 
-        <!-- Text-Bereich (Links) -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -46,27 +45,23 @@
                 android:layout_height="3dp"
                 android:background="#4F8EF7"
                 android:layout_marginTop="12dp" />
-
         </LinearLayout>
 
-        <!-- Java-Logo (Rechts) -->
-        <!-- HINWEIS: java_logo.png muss unter res/drawable/ abgelegt werden -->
         <ImageView
             android:id="@+id/ivJavaLogo"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:layout_marginStart="12dp"
-                            android:src="@drawable/java_cup"
+            android:src="@drawable/java_cup"
             android:scaleType="fitCenter"
             android:contentDescription="Java Logo" />
-
     </LinearLayout>
 
     <!-- Kapitel-Liste -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:padding="12dp"
         android:clipToPadding="false" />
 
