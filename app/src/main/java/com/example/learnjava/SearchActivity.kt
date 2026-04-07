@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class SearchActivity : AppCompatActivity() {
+
     private lateinit var adapter: ChapterAdapter
     private val allParts = mutableListOf<Chapter>()
     private val filteredResults = mutableListOf<Chapter>()
@@ -18,6 +19,7 @@ class SearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
+        // UI programmatisch erstellen
         val root = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setBackgroundColor(Color.parseColor("#F0F4F8"))
@@ -48,9 +50,14 @@ class SearchActivity : AppCompatActivity() {
             )
         }
         root.addView(rvResults)
+
         setContentView(root)
 
+        // Daten vorbereiten
         setupData()
+        
+        // Initial alle anzeigen als "Vorschläge"
+        filteredResults.addAll(allParts)
 
         adapter = ChapterAdapter(filteredResults) { chapter ->
             val intent = Intent(this, PartDetailActivity::class.java)
@@ -60,33 +67,39 @@ class SearchActivity : AppCompatActivity() {
         }
         rvResults.adapter = adapter
 
+        // Echtzeit-Suche
         searchInput.addTextChangedListener { text ->
             filterContent(text.toString())
         }
+        
+        // Titel in der Bar
+        supportActionBar?.title = "Suche"
     }
 
     private fun setupData() {
         allParts.addAll(listOf(
-            Chapter(1,  "Part 1 – Hardware & Software",       "Theorie: Grundlagen zu Hardware und Software (kein Code)"),
-            Chapter(2,  "Part 2 – Erste Java-Programme",      "Kap. 5–7: System.out.println..."),
-            Chapter(3,  "Part 3 – Daten & Ein-/Ausgabe",      "Kap. 8–15: Variablen, Datentypen..."),
-            Chapter(4,  "Part 4 – Verzweigungen & Schleifen", "Kap. 16–25: if/else..."),
-            Chapter(5,  "Part 5 – Weitere Java-Features",     "Kap. 30–35: Random..."),
-            Chapter(6,  "Part 6 – OOP Grundlagen",            "Kap. 40–54: Klassen..."),
-            Chapter(7,  "Part 7 – Arrays",                    "Kap. 60–68: Arrays..."),
-            Chapter(8,  "Part 8 – File I/O",                  "Kap. 70–73: Dateien..."),
-            Chapter(9,  "Part 9 – Fortgeschrittene OOP",      "Kap. 80–86: Vererbung..."),
-            Chapter(10, "Part 10 – Rekursion",                "Kap. 90–96: Fakultät..."),
-            Chapter(11, "Part 11 – Exceptions",               "Kap. 100–106: try/catch..."),
-            Chapter(12, "Part 12 – Sortieralgorithmen",       "Kap. 110–112: Selection Sort..."),
-            Chapter(13, "Part 13 – JavaFX Grafik",            "Kap. 120–121: JavaFX..."),
-            Chapter(14, "Part 14 – Linked Lists",             "Kap. 130–133: Node...")
+            Chapter(1, "Part 1 – Hardware & Software", "Theorie: Grundlagen zu Hardware und Software (kein Code)"),
+            Chapter(2, "Part 2 – Erste Java-Programme", "Kap. 5–7: System.out.println..."),
+            Chapter(3, "Part 3 – Daten & Ein-/Ausgabe", "Kap. 8–15: Variablen, Datentypen..."),
+            Chapter(4, "Part 4 – Verzweigungen & Schleifen", "Kap. 16–25: if/else..."),
+            Chapter(5, "Part 5 – Weitere Java-Features", "Kap. 30–35: Random..."),
+            Chapter(6, "Part 6 – OOP Grundlagen", "Kap. 40–54: Klassen..."),
+            Chapter(7, "Part 7 – Arrays", "Kap. 60–68: Arrays..."),
+            Chapter(8, "Part 8 – File I/O", "Kap. 70–73: Dateien..."),
+            Chapter(9, "Part 9 – Fortgeschrittene OOP", "Kap. 80–86: Vererbung..."),
+            Chapter(10, "Part 10 – Rekursion", "Kap. 90–96: Fakultät..."),
+            Chapter(11, "Part 11 – Exceptions", "Kap. 100–106: try/catch..."),
+            Chapter(12, "Part 12 – Sortieralgorithmen", "Kap. 110–112: Selection Sort..."),
+            Chapter(13, "Part 13 – JavaFX Grafik", "Kap. 120–121: JavaFX..."),
+            Chapter(14, "Part 14 – Linked Lists", "Kap. 130–133: Node...")
         ))
     }
 
     private fun filterContent(query: String) {
         filteredResults.clear()
-        if (query.length >= 2) {
+        if (query.isEmpty()) {
+            filteredResults.addAll(allParts)
+        } else {
             allParts.forEach { part ->
                 val content = loadRawText(part.number)
                 if (part.title.contains(query, true) || 
@@ -101,6 +114,12 @@ class SearchActivity : AppCompatActivity() {
 
     private fun loadRawText(partNumber: Int): String {
         val resId = resources.getIdentifier("part$partNumber", "raw", packageName)
-        return if (resId != 0) resources.openRawResource(resId).bufferedReader().readText() else ""
+        return if (resId != 0) {
+            try {
+                resources.openRawResource(resId).bufferedReader().readText()
+            } catch (e: Exception) {
+                ""
+            }
+        } else ""
     }
 }
