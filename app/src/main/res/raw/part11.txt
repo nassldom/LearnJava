@@ -21,9 +21,9 @@ try {
 
 <b>Häufige Exception-Typen:</b>
 - <code>ArithmeticException</code>: Mathematische Fehler (z.B. Division durch 0).
-- <code>IndexOutOfBoundsException</code>: Zugriff auf ungültigen Array-Index.
 - <code>NullPointerException</code>: Zugriff auf ein Objekt, das <code>null</code> ist.
-- <code>InputMismatchException</code>: Falscher Datentyp bei der Eingabe (Scanner).
+- <code>IOException</code>: Fehler beim Ein- oder Ausgeben von Daten (häufig bei Dateien).
+- <b>Checked vs. Unchecked:</b> Checked Exceptions müssen behandelt werden (z.B. <code>IOException</code>), Unchecked (Runtime) Exceptions nicht zwingend (z.B. <code>NullPointerException</code>).
 
 <b>2. Weiterwerfen und Eigene Exceptions (Kapitel 101)</b>
 - <b>throws:</b> Deklariert in der Methodensignatur, dass eine Methode eine Exception auslösen könnte.
@@ -32,15 +32,14 @@ try {
 
 <b>3. Scanner, PrintWriter und Dateien (Kapitel 102, 106)</b>
 Exceptions sind besonders wichtig beim Arbeiten mit Dateien (I/O), da hier oft unvorhersehbare Fehler auftreten (z.B. Datei nicht gefunden).
-
 - <b>Scanner:</b> Zum Lesen von Textdateien.
 - <b>PrintWriter:</b> Zum Schreiben in Textdateien.
-- <b>File-Klasse:</b> Repräsentiert eine Datei oder ein Verzeichnis im Dateisystem. Mit ihr kannst du prüfen, ob eine Datei existiert (<code>exists()</code>), wie groß sie ist (<code>length()</code>) oder sie löschen (<code>delete()</code>).
+- <b>File-Klasse:</b> Repräsentiert eine Datei oder ein Verzeichnis. Methoden wie <code>exists()</code>, <code>length()</code> oder <code>delete()</code> helfen bei der Dateiverwaltung.
 
 <b>4. Binäre Dateien (Kapitel 103-105)</b>
-Während Textdateien für Menschen lesbar sind, speichern binäre Dateien Daten im Format der Maschine.
-- <b>DataOutputStream:</b> Zum Schreiben von primitiven Datentypen in binärer Form.
-- <b>DataInputStream:</b> Zum Lesen von binären Daten.
+Während Textdateien für Menschen lesbar sind, speichern binäre Dateien Daten im Format der Maschine (effizient für Audio, Bilder usw.).
+- <b>InputStream / OutputStream:</b> Die Basisklassen für alle binären Datenströme.
+- <b>DataOutputStream / DataInputStream:</b> Zum Schreiben/Lesen von primitiven Datentypen (int, double, etc.) in binärer Form.
 
 <b>Merksatz:</b>
-Nutze Exception Handling, um deine Programme robust gegen Benutzereingaben und externe Fehler (wie fehlende Dateien) zu machen.
+Nutze Exception Handling, um deine Programme robust gegen Fehlbedienung und externe Fehler (wie fehlende Dateien) zu machen.
