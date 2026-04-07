@@ -8,7 +8,6 @@ data class Chapter(
 )
 
 object ChapterParser {
-
     fun parse(partNumber: Int, text: String): List<Chapter> {
         val chapters = mutableListOf<Chapter>()
         val lines = text.lines()
@@ -18,15 +17,18 @@ object ChapterParser {
 
         for (line in lines) {
             val trimmed = line.trim()
-            if (trimmed.matches(Regex("Kapitel \\d+.*"))) {
+            // Regex angepasst: Erlaubt optional führende HTML-Tags (z.B. <b>Kapitel 8...)
+            if (trimmed.matches(Regex(".*Kapitel \\d+.*"))) {
                 if (currentTitle.isNotEmpty()) {
                     chapters.add(
                         Chapter(currentNumber, currentTitle, "", currentContent.toString().trim())
                     )
                     currentContent.clear()
                 }
-                val numStr = trimmed.removePrefix("Kapitel ").split(" ").firstOrNull() ?: "0"
-                currentNumber = numStr.toIntOrNull() ?: 0
+                
+                // Extrahiere Nummer aus dem Text (Kapitel \d+)
+                val matchResult = Regex("Kapitel (\\d+)").find(trimmed)
+                currentNumber = matchResult?.groupValues?.get(1)?.toIntOrNull() ?: 0
                 currentTitle = trimmed
             } else {
                 currentContent.appendLine(line)
@@ -38,7 +40,6 @@ object ChapterParser {
                 Chapter(currentNumber, currentTitle, "", currentContent.toString().trim())
             )
         }
-
         return chapters
     }
 }
