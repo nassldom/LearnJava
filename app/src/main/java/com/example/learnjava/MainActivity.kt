@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val chapters = listOf(
+        val chapters = mutableListOf(
             Chapter(1,  "Part 1 – Hardware & Software",       "Theorie: Grundlagen zu Hardware und Software (kein Code)"),
             Chapter(2,  "Part 2 – Erste Java-Programme",      "Kap. 5–7: System.out.println, erste Programme (Hello.java, HelloPlanets.java, Fantasy.java)"),
             Chapter(3,  "Part 3 – Daten & Ein-/Ausgabe",      "Kap. 8–15: Variablen, Datentypen, Scanner, String-Methoden, printf, Wrapper-Klassen"),
