@@ -1,67 +1,43 @@
-<b>TEIL 7 – Arrays (Kap. 60–68)</b>
+<b>Part 7: Arrays (Kapitel 60-68)</b>
 
-<b>Kapitel 60 – Einführung in Arrays</b>
+In diesem Teil lernen wir, wie man viele Daten des gleichen Typs in einer Liste (Array) speichert.
 
-Ein <b>Array</b> ist eine Liste von Werten desselben Typs mit <u>fester Größe</u>.
-• Index beginnt bei <b>0</b>.
-• Zugriff: <i>stuff[0]</i>.
-
-[CODE]
-int[] stuff = new int[5]; // Array für 5 Zahlen
-stuff[0] = 23;
-[/CODE]
-
-<u>Wichtig:</u> <i>array.length</i> gibt die Größe zurück.
-
-
-<b>Kapitel 61 – Array-Algorithmen</b>
-
-Arrays durchlaufen mit Schleifen:
-
-<b>Klassisch:</b>
-[CODE]
-for (int i=0; i < arr.length; i++) { ... }
-[/CODE]
-
-<b>Enhanced (for-each):</b>
-[CODE]
-for (int wert : arr) { ... }
-[/CODE]
-
-
-<b>Kapitel 62 & 63 – Arrays & Parameter</b>
-
-Arrays können als Instanzvariablen in Klassen genutzt werden. Wenn du ein Array an eine Methode übergibst, wird die <b>Referenz</b> übergeben. Die Methode kann also die <u>Werte im Original-Array ändern</u>!
-
-
-<b>Kapitel 64 & 65 – Methoden & Objekt-Arrays</b>
-
-Du kannst auch Arrays von Objekten (z.B. Strings) erstellen:
-<i>String[] namen = new String[5];</i>
-
-<u>Achtung:</u> Die Zellen sind am Anfang <b>null</b>! Immer erst prüfen:
-<i>if (namen[i] != null) { ... }</i>
-
-
-<b>Kapitel 66 – Lineare Suche</b>
-
-Prüfe jedes Element nacheinander, bis das gesuchte gefunden ist. Wenn nicht gefunden, gibt man oft <b>-1</b> zurück.
-
-
-<b>Kapitel 67 – Zweidimensionale Arrays (2D)</b>
-
-Wie eine Tabelle mit <u>Zeilen und Spalten</u>:
-<i>int[][] tabelle = new int[3][5];</i> // 3 Zeilen, 5 Spalten
-Zugriff: <i>tabelle[zeile][spalte]</i>
-
-
-<b>Kapitel 68 – StringBuffer</b>
-
-Da Strings unveränderlich sind, ist das Zusammenbauen vieler Texte in einer Schleife langsam. Nutze dafür <b>StringBuffer</b> (oder <i>StringBuilder</i>):
+<b>1. Einführung in Arrays (Kapitel 60)</b>
+Ein Array ist eine Sammlung von Werten mit einer <b>festen Größe</b>. Der Index beginnt immer bei <b>0</b>.
 
 [CODE]
-StringBuffer sb = new StringBuffer();
-sb.append("Hallo");
-sb.append(" Welt");
-String ergebnis = sb.toString();
+int[] zahlen = new int[5]; // Erzeugt ein Array für 5 ganze Zahlen
+zahlen[0] = 10;            // Erster Wert
+zahlen[4] = 50;            // Letzter Wert (bei Größe 5)
 [/CODE]
+- <b>zahlen.length:</b> Gibt die Anzahl der Elemente zurück (hier 5).
+
+<b>2. Arrays durchlaufen (Kapitel 61)</b>
+Um alle Werte eines Arrays zu verarbeiten, nutzen wir Schleifen.
+
+[CODE]
+// Klassische for-Schleife
+for (int i = 0; i < zahlen.length; i++) {
+    System.out.println(zahlen[i]);
+}
+
+// Enhanced for-Schleife (for-each)
+for (int x : zahlen) {
+    System.out.println(x);
+}
+[/CODE]
+
+<b>3. Arrays von Objekten (Kapitel 65)</b>
+Du kannst auch Arrays erstellen, die Objekte (z.B. Strings oder eigene Klassen) speichern.
+<i>Achtung:</i> Die einzelnen Plätze im Array sind am Anfang <b>null</b>!
+
+<b>4. Zweidimensionale Arrays (Kapitel 67)</b>
+Man kann sich 2D-Arrays wie eine Tabelle mit Zeilen und Spalten vorstellen.
+
+[CODE]
+int[][] tabelle = new int[3][4]; // 3 Zeilen, 4 Spalten
+tabelle[0][0] = 1;
+[/CODE]
+
+<b>5. StringBuffer (Kapitel 68)</b>
+Ein <i>StringBuffer</i> ist wie ein veränderbarer String. Er ist effizienter, wenn man einen Text oft bearbeiten oder verlängern muss (mit <i>.append()</i>).
