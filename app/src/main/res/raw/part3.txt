@@ -10,7 +10,18 @@ Java kennt acht primitive Datentypen. Die vier wichtigsten für den Einstieg:
 <b>boolean</b>: Wahrheitswert (true oder false)
 <b>char</b>: Einzelnes Zeichen (z.B. 'A')
 
-Primitive Typen speichern ihren Wert <u>direkt im Speicher</u> – kein Objekt, keine Referenz. Das macht sie schnell und speichersparsam. In Java muss jede Variable einen <b>festen Typ</b> haben. Das nennt sich <u>statische Typisierung</u>.
+Alle acht primitiven Datentypen:
+
+<b>byte</b>: 8 Bit, -128 bis 127
+<b>short</b>: 16 Bit, -32.768 bis 32.767
+<b>int</b>: 32 Bit, ca. ±2,1 Milliarden
+<b>long</b>: 64 Bit, sehr große Zahlen (benötigt L am Ende: 100L)
+<b>float</b>: 32 Bit Fließkommazahl (benötigt F: 3.14F)
+<b>double</b>: 64 Bit Fließkommazahl (Standard für Dezimalzahlen)
+<b>boolean</b>: true oder false
+<b>char</b>: Ein Zeichen in einfachen Hochkommas ('A', '7', '?')
+
+Primitive Typen speichern ihren Wert direkt im Speicher – kein Objekt, keine Referenz. Das macht sie schnell und speichersparsam. In Java muss jede Variable einen <b>festen Typ</b> haben. Das nennt sich statische Typisierung.</b>
 
 <b>Codebeispiel (Variable.java):</b>
 
@@ -21,7 +32,7 @@ public class Variable {
         double preis = 9.99;
         boolean istAktiv = true;
         char buchstabe = 'A';
-
+        
         System.out.println("Alter: " + alter);
         System.out.println("Preis: " + preis);
     }
@@ -32,38 +43,81 @@ public class Variable {
 • <i>int zahl = 3.5;</i> → Compilerfehler, weil 3.5 ein double ist.
 • <i>boolean flag = 1;</i> → In Java nicht erlaubt (nur true/false).
 
-
 <b>Kapitel 9 – Variablen und Zuweisung</b>
 
-Eine Variable ist ein <u>benannter Speicherplatz</u>.
+Eine Variable ist ein benannter Speicherplatz.
 • <b>Deklaration</b> = Typ + Name (z.B. <i>int punkte;</i>)
 • <b>Initialisierung</b> = erster Wert (z.B. <i>punkte = 100;</i>)
 • <b>Zuweisung</b> = Wert ändern (z.B. <i>punkte = 150;</i>)
 
 Der <b>= Operator</b> ist keine mathematische Gleichung, sondern eine <b>Zuweisung</b>: Der Wert rechts wird in die Variable links gespeichert.
 
+<b>Codebeispiel (Example.java):</b>
+
+[CODE]
+public class Example {
+    public static void main( String[] args ) {
+        long hoursWorked = 40;
+        double payRate = 10.0,
+               taxRate = 0.10;
+        
+        System.out.println("Hours Worked: " + hoursWorked);
+        System.out.println("Pay Amount: " + (hoursWorked * payRate));
+        System.out.println("Tax Amount: " + (hoursWorked * payRate * taxRate));
+    }
+}
+[/CODE]
 
 <b>Kapitel 10 – Arithmetische Operatoren</b>
 
 <b>+</b> Addition, <b>-</b> Subtraktion, <b>*</b> Multiplikation, <b>/</b> Division, <b>%</b> Modulo (Rest).
 
-<u>Achtung Ganzzahldivision:</u> Wenn beide Zahlen <i>int</i> sind, wird der Rest einfach abgeschnitten! <i>10 / 3</i> ergibt <b>3</b>, nicht 3.33.
+Achtung <b>Ganzzahldivision</b>: Wenn beide Zahlen <i>int</i> sind, wird der Rest einfach abgeschnitten! <i>10 / 3</i> ergibt <b>3</b>, nicht 3.33.
 
 <b>Operatorpriorität:</b> Punkt vor Strich (*, /, % vor +, -). Klammern () ändern die Reihenfolge.
 
+<b>Codebeispiel:</b>
+
+[CODE]
+public class Arithmetic {
+    public static void main( String[] args ) {
+        int a = 10;
+        int b = 3;
+        
+        System.out.println("Addition: " + (a + b));        // 13
+        System.out.println("Division: " + (a / b));        // 3
+        System.out.println("Modulo: " + (a % b));          // 1
+        System.out.println("Double Division: " + (a / 3.0)); // 3.333...
+    }
+}
+[/CODE]
 
 <b>Kapitel 11 – Objektdaten (Strings)</b>
 
 Neben primitiven Typen gibt es <b>Referenztypen</b> (Objekte). Der wichtigste ist <b>String</b>. Ein String speichert Text und bietet viele Methoden:
 
+<b>Wichtige String-Methoden:</b>
+• <b>length()</b> – gibt Länge des Strings zurück
+• <b>toUpperCase()</b> – wandelt in Großbuchstaben um
+• <b>toLowerCase()</b> – wandelt in Kleinbuchstaben um
+• <b>charAt(index)</b> – gibt Zeichen an Position zurück (beginnt bei 0)
+• <b>substring(start, end)</b> – extrahiert Teil-String
+• <b>indexOf(text)</b> – findet Position eines Textes
+• <b>equals(other)</b> – vergleicht zwei Strings auf Gleichheit
+
 [CODE]
 String name = "Java";
-System.out.println(name.length()); // Länge
-System.out.println(name.toUpperCase()); // Großbuchstaben
+System.out.println(name.length());        // 4
+System.out.println(name.toUpperCase());   // JAVA
+System.out.println(name.charAt(0));       // J
+System.out.println(name.substring(0, 2)); // Ja
+System.out.println(name.indexOf("va"));   // 2
 [/CODE]
 
-<u>Wichtig:</u> Strings immer mit <b>.equals()</b> vergleichen, niemals mit ==!
+<b>Wichtig:</b> Strings immer mit <b>.equals()</b> vergleichen, niemals mit ==!
 
+<i>name.equals("Java")</i> → richtig
+<i>name == "Java"</i> → falsch (vergleicht nur Referenzen)
 
 <b>Kapitel 12 – Ein- und Ausgabe (Scanner)</b>
 
@@ -71,33 +125,130 @@ Für die Eingabe von der Tastatur nutzt man die Klasse <b>Scanner</b>:
 
 [CODE]
 import java.util.Scanner;
-// ...
-Scanner scanner = new Scanner(System.in);
-int zahl = scanner.nextInt();
+
+public class Echo {
+    public static void main( String[] args ) {
+        String inData;
+        Scanner scan = new Scanner( System.in );
+        
+        System.out.println("Enter the data:");
+        inData = scan.nextLine();
+        
+        System.out.println("You entered:" + inData);
+    }
+}
 [/CODE]
 
-<b>Methoden:</b> <i>nextInt()</i> für Zahlen, <i>nextLine()</i> für ganzen Text.
+<b>Wichtige Methoden:</b>
+• <b>nextInt()</b> – liest ganze Zahl (int)
+• <b>nextDouble()</b> – liest Dezimalzahl (double)
+• <b>nextLine()</b> – liest gesamte Zeile als String
+• <b>next()</b> – liest ein einzelnes Wort
 
+Achtung: <i>nextInt()</i> lässt den Zeilenumbruch stehen! Nach nextInt() besser <i>scan.nextLine()</i> aufrufen um die Zeile zu leeren.
 
-<b>Kapitel 13 – Mathematische Funktionen (Math)</b>
+<b>Kapitel 13 – Floating Point (Gleitkommazahlen)</b>
+
+Java bietet zwei Fließkommatypen:
+• <b>float</b> – 32 Bit, weniger präzise (braucht F: 3.14F)
+• <b>double</b> – 64 Bit, Standard für Dezimalzahlen
+
+<b>Scanner für double:</b>
+
+[CODE]
+import java.util.Scanner;
+
+public class DoubleInput {
+    public static void main( String[] args ) {
+        double value;
+        Scanner scan = new Scanner( System.in );
+        
+        System.out.println("Enter a number:");
+        value = scan.nextDouble();
+        
+        System.out.println("You entered: " + value);
+    }
+}
+[/CODE]
+
+<b>Math-Klasse:</b>
 
 Java bietet die Klasse <b>Math</b> für Berechnungen:
 • <b>Math.sqrt(x)</b>: Quadratwurzel
 • <b>Math.pow(x, y)</b>: x hoch y
+• <b>Math.abs(x)</b>: Absolutwert
 • <b>Math.PI</b>: Die Kreiszahl Pi
+• <b>Math.sin(x)</b>, <b>Math.cos(x)</b>: Sinus/Cosinus (im Bogenmaß!)
+• <b>Math.toRadians(deg)</b>: Grad → Bogenmaß
 
-<u>Hinweis:</u> <i>Math.sin</i> und <i>Math.cos</i> erwarten das Argument im <b>Bogenmaß</b> (Radiant), nicht in Grad! Umrechnung mit <i>Math.toRadians()</i>.
+[CODE]
+double wurzel = Math.sqrt(16);        // 4.0
+double potenz = Math.pow(2, 3);       // 8.0
+double pi = Math.PI;                   // 3.14159...
+double rad = Math.toRadians(180);     // π (3.14...)
+[/CODE]
 
+<b>Kapitel 14 – Formatierte Ausgabe mit DecimalFormat</b>
 
-<b>Kapitel 14 & 15 – Formatierte Ausgabe</b>
-
-Für schöne Ausgaben (z.B. 2 Nachkommastellen):
+Für schöne Ausgaben mit fester Anzahl Nachkommastellen:
 
 <b>1. DecimalFormat:</b>
+
+[CODE]
+import java.text.*;
+
+public class FormatDemo {
+    public static void main( String[] args ) {
+        Integer i = 7654321;
+        double d = 11000.001;
+        
+        DecimalFormat numForm = new DecimalFormat();
+        
+        System.out.println("Integer = " + numForm.format(i) +
+                         "\n double = " + numForm.format(d));
+    }
+}
+[/CODE]
+
+Muster für DecimalFormat:
+• <b>"0.00"</b> – 2 Nachkommastellen
+• <b>"#,##0.00"</b> – mit Tausender-Trennzeichen
+• <b>"0.##"</b> – bis zu 2 Nachkommastellen (optional)
+
+Beispiel:
 <i>DecimalFormat df = new DecimalFormat("0.00");</i>
 <i>System.out.println(df.format(12.345)); // 12,35</i>
 
-<b>2. printf():</b>
-<i>System.out.printf("Preis: %.2f Euro", 19.99);</i>
+<b>Kapitel 15 – Formatierte Ausgabe mit printf()</b>
 
-Platzhalter: <b>%d</b> (int), <b>%f</b> (double), <b>%s</b> (String), <b>%n</b> (Zeilenumbruch).
+<b>printf()</b> bietet eine einfachere Alternative:
+
+<b>Format-Spezifizierer:</b>
+• <b>%d</b> – int (ganze Zahl)
+• <b>%f</b> – double (Fließkommazahl)
+• <b>%s</b> – String (Text)
+• <b>%n</b> – Zeilenumbruch
+• <b>%.2f</b> – double mit 2 Nachkommastellen
+
+[CODE]
+System.out.printf("Preis: %.2f Euro%n", 19.99);
+System.out.printf("Name: %s, Alter: %d%n", "Anna", 25);
+System.out.printf("Pi: %.4f%n", Math.PI);
+[/CODE]
+
+<b>Ausgabe:</b>
+Preis: 19,99 Euro
+Name: Anna, Alter: 25
+Pi: 3,1416
+
+<b>Weitere Optionen:</b>
+• <b>%8.2f</b> – mindestens 8 Zeichen breit, 2 Nachkommastellen
+• <b>%-8s</b> – linksbündig (Standard ist rechtsbündig)
+• <b>%08d</b> – mit führenden Nullen auffüllen
+
+<b>Beispiel mit Formatierung:</b>
+
+[CODE]
+System.out.printf("%8.2f%n", 40.0/3.0);  //   13,33
+System.out.printf("%-10s%d%n", "Punkte:", 100);
+[/CODE]
