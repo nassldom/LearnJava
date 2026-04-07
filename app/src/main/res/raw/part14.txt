@@ -1,79 +1,46 @@
-PART 14 – Linked Lists
-(Kap. 130–133)
+<b>Part 14: Linked Lists (Kapitel 130-133)</b>
 
-Node (Knoten) – Grundbaustein:
+In diesem Teil lernst du die Konzepte von verketteten Listen (Linked Lists) kennen – eine dynamische Datenstruktur, die im Gegensatz zu Arrays flexibel wachsen kann.
+
+<b>1. Das Node-Konzept (Kapitel 130)</b>
+Eine Linked List besteht aus einzelnen **Knoten** (Nodes). Jeder Knoten speichert Daten und einen Verweis auf den **nächsten** Knoten.
+- <code>Head:</code> Ein Verweis auf den ersten Knoten der Liste. Ist dieser <code>null</code>, ist die Liste leer.
 [CODE]
 public class Node {
-    private int value;
-    private Node next; // Zeiger auf nächsten Knoten
+    int data;
+    Node next;
 
-    public Node(int value) {
-        this.value = value;
-        this.next  = null;
+    Node(int data) {
+        this.data = data;
+        this.next = null;
     }
-    public int  getValue()       { return value; }
-    public Node getNext()        { return next; }
-    public void setNext(Node n)  { next = n; }
 }
 [/CODE]
 
-LinkedList – wichtige Methoden:
+<b>2. Listen-Operationen (Kapitel 131-132)</b>
+Das Arbeiten mit Listen erfordert das "Traversieren" (Durchlaufen) der Knotenkette.
+- <code>Einfügen:</code> Neue Knoten werden meist am Anfang oder Ende angehängt.
+- <code>Traversieren:</code> Man startet beim <code>head</code> und folgt den <code>next</code>-Verweisen in einer Schleife.
 [CODE]
-insertFirst(data) // vorne einfügen
-deleteFirst()     // vorne löschen
-traverse()        // alle Knoten ausgeben
-getFirst()        // ersten Wert lesen
-getLast()         // bis Ende traversieren
-isEmpty()         // Liste leer?
+Node current = head;
+while (current != null) {
+    System.out.println(current.data);
+    current = current.next;
+}
 [/CODE]
 
-GenericNode<E> – typsicher:
+<b>3. Generische Listen (Kapitel 133)</b>
+Durch **Generics** kann eine Linked List so programmiert werden, dass sie jeden beliebigen Datentyp (z.B. <code>String</code>, <code>Integer</code>, eigene Objekte) speichern kann.
 [CODE]
 public class GenericNode<E> {
-    private E value;
-    private GenericNode<E> next;
-
-    public GenericNode(E value) {
-        this.value = value;
-        this.next  = null;
-    }
-    public E           getValue()            { return value; }
-    public GenericNode<E> getNext()          { return next; }
-    public void        setNext(GenericNode<E> n) { next = n; }
+    E data;
+    GenericNode<E> next;
+    // ...
 }
+
+// Nutzung:
+GenericLinkedList<String> namen = new GenericLinkedList<>();
 [/CODE]
 
-GenericLinkedList<E> – für jeden Typ:
-[CODE]
-// Integer-Liste:
-GenericLinkedList<Integer> intList = new GenericLinkedList<>();
-intList.insertFirst(42);
-intList.insertFirst(17);
-
-// Bird-Liste – gleiche Klasse, anderer Typ!
-GenericLinkedList<Bird> birdList = new GenericLinkedList<>();
-birdList.insertFirst(new Bird("Turdus","migratoris","Robin",1));
-[/CODE]
-
-getLast() Implementierung:
-[CODE]
-public E getLast() {
-    if (isEmpty()) return null;
-    GenericNode<E> p = headPtr;
-    while (p.getNext() != null)
-        p = p.getNext();
-    return p.getValue();
-}
-[/CODE]
-
-Merksatz:
-• Linked List vs. Array:
-  - Array:      feste Größe, schneller Index-Zugriff
-  - LinkedList: variable Größe, kein direkter Index
-• Generic = wiederverwendbar für jeden Referenztyp
-• Primitive (int, double) nicht direkt →
-  Wrapper verwenden (Integer, Double)
-• Autoboxing: insertFirst(42) → Integer automatisch
-
-Dateien: Node.java, LinkedList.java, OrderedLinkedList.java,
-         GenericNode.java, GenericLinkedList.java, Bird.java
+<b>Merksatz:</b>
+Während Arrays schnellen Zugriff per Index bieten, sind Linked Lists effizienter beim häufigen Einfügen und Löschen von Elementen, da keine anderen Elemente verschoben werden müssen.
