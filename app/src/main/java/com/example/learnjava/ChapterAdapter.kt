@@ -26,29 +26,32 @@ class ChapterAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val chapter = chapters[position]
-        holder.title.text = chapter.title
+        holder.title.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(chapter.title, Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            @Suppress("DEPRECATION")
+            Html.fromHtml(chapter.title)
+        }
 
-        // Zeige summary wenn vorhanden, sonst ersten Satz aus content
+        // Vorschautext generieren
         val rawText = when {
             chapter.summary.isNotBlank() -> chapter.summary
             chapter.content.isNotBlank() -> {
                 chapter.content
                     .replace(Regex("\\[CODE\\][\\s\\S]*?\\[/CODE\\]"), "")
                     .trim()
-                    .lines()
-                    .firstOrNull { it.isNotBlank() }
-                    ?.take(120)
-                    ?: ""
+                    .take(150) // Nimm die ersten 150 Zeichen für die Vorschau
             }
             else -> ""
         }
 
-        // Markdown-artige Formate in HTML umwandeln (für Vorschau)
-        var processed = rawText
+        var processed = rawText.replace("
+", " ") // Zeilenumbrüche in Leerzeichen für die einzeilige/kurze Vorschau
+        
+        // Formate in HTML rendern
         while (processed.contains("**")) {
             processed = processed.replaceFirst("**", "<b>").replaceFirst("**", "</b>")
         }
-        processed = processed.replace("<code>", "<font color='#4F8EF7'><i>").replace("</code>", "</i></font>")
 
         val htmlText = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Html.fromHtml(processed, Html.FROM_HTML_MODE_LEGACY)
