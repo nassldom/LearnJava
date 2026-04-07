@@ -5,8 +5,6 @@ import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
-import android.text.SpannableString
-import android.text.style.UnderlineSpan
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -17,11 +15,10 @@ class ChapterDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chapter_detail)
 
-        val title   = intent.getStringExtra("chapterTitle") ?: ""
+        val title = intent.getStringExtra("chapterTitle") ?: ""
         val content = intent.getStringExtra("chapterContent") ?: ""
 
         findViewById<TextView>(R.id.tvDetailTitle).text = title
-
         buildContent(content)
     }
 
@@ -29,10 +26,7 @@ class ChapterDetailActivity : AppCompatActivity() {
         val layout = findViewById<LinearLayout>(R.id.contentLayout)
         layout.removeAllViews()
 
-        // Inhalte werden durch [CODE]...[/CODE] fuer Code-Bloecke getrennt.
-        // Fuer Formatierungen im Text koennen diese Tags genutzt werden:
-        //   <b>fett</b>  <i>kursiv</i>  <u>unterstrichen</u>
-        //   <h3>Ueberschrift</h3>
+        // Inhalte werden durch [CODE]...[/CODE] für Code-Blöcke getrennt.
         val parts = content.split("[CODE]", "[/CODE]")
 
         parts.forEachIndexed { index, part ->
@@ -45,8 +39,8 @@ class ChapterDetailActivity : AppCompatActivity() {
             )
 
             if (index % 2 == 1) {
-                // ── Code-Block ──────────────────────────────────────────
-                tv.text     = part.trim()
+                // ── Code-Block ──
+                tv.text = part.trim()
                 tv.typeface = Typeface.MONOSPACE
                 tv.textSize = 13f
                 tv.setTextColor(Color.parseColor("#E8EAF6"))
@@ -54,21 +48,34 @@ class ChapterDetailActivity : AppCompatActivity() {
                 tv.setPadding(28, 24, 28, 24)
                 lp.setMargins(0, 16, 0, 16)
             } else {
-                // ── Normaler Text / HTML-formatierter Text ───────────────
-                // Unterstuetzt: <b>, <i>, <u>, <h3>, <br>
+                // ── Normaler Text / HTML ──
+                var processed = part.trim()
+                
+                // Unterstützung für **Markdown Bold** falls in Textdateien vorhanden
+                while (processed.contains("**")) {
+                    processed = processed.replaceFirst("**", "<b>").replaceFirst("**", "</b>")
+                }
+                
+                // Unterstützung für <code> (falls als Tag genutzt)
+                processed = processed.replace("<code>", "<font color='#4F8EF7'><i>").replace("</code>", "</i></font>")
+
+                // Konvertiere einfache Zeilenumbrüche in <br>, damit sie von Html.fromHtml nicht ignoriert werden
+                processed = processed.replace("
+", "<br>")
+
                 val htmlText = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    Html.fromHtml(part.trim(), Html.FROM_HTML_MODE_LEGACY)
+                    Html.fromHtml(processed, Html.FROM_HTML_MODE_LEGACY)
                 } else {
                     @Suppress("DEPRECATION")
-                    Html.fromHtml(part.trim())
+                    Html.fromHtml(processed)
                 }
-                tv.text      = htmlText
-                tv.textSize  = 15f
+                
+                tv.text = htmlText
+                tv.textSize = 15f
                 tv.setTextColor(Color.parseColor("#1A1A2E"))
                 tv.setPadding(0, 8, 0, 8)
                 lp.setMargins(0, 4, 0, 4)
             }
-
             layout.addView(tv, lp)
         }
     }
