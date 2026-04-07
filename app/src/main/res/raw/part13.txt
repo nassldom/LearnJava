@@ -4,8 +4,8 @@ In diesem Teil lernst du die Grundlagen der grafischen Oberflächen mit JavaFX k
 
 <b>1. Grundstruktur einer JavaFX-App (Kapitel 120)</b>
 Jede JavaFX-Anwendung erbt von <code>Application</code> und überschreibt die <code>start()</code>-Methode.
-- <code>Stage:</code> Das Hauptfenster (die "Bühne").
-- <code>Scene:</code> Der Inhalt des Fensters (die "Szene").
+- <code>Stage:</code> Das Hauptfenster (die \"Bühne\").
+- <code>Scene:</code> Der Inhalt des Fensters (die \"Szene\").
 - <code>Root Node:</code> Ein Container (z.B. <code>Group</code>), der alle grafischen Elemente enthält.
 [CODE]
 import javafx.application.Application;
@@ -22,7 +22,7 @@ public class JavaFXApp extends Application {
         Group root = new Group(circle);
         Scene scene = new Scene(root, 400, 300);
         
-        primaryStage.setTitle("Meine Grafik");
+        primaryStage.setTitle(\"Meine Grafik\");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -30,11 +30,11 @@ public class JavaFXApp extends Application {
 [/CODE]
 
 <b>2. Grafische Primitiven und Koordinaten (Kapitel 121)</b>
-JavaFX nutzt ein Koordinatensystem, bei dem der Ursprung <code>(0,0)</code> in der **oberen linken Ecke** liegt.
+JavaFX nutzt ein Koordinatensystem, bei dem der Ursprung <code>(0,0)</code> in der <b>oberen linken Ecke</b> liegt.
 - <code>Circle(cx, cy, r):</code> Kreis mit Mittelpunkt und Radius.
 - <code>Rectangle(x, y, w, h):</code> Rechteck mit Startpunkt (links oben), Breite und Höhe.
 - <code>Line(x1, y1, x2, y2):</code> Linie zwischen zwei Punkten.
 - <code>Farben:</code> Mit <code>setFill()</code> (Füllung) und <code>setStroke()</code> (Rand) anpassbar.
 
 <b>Merksatz:</b>
-Denke daran, dass in der Computergrafik die Y-Achse nach **unten** zunimmt – je größer der Y-Wert, desto tiefer befindet sich das Objekt im Fenster.
+Denke daran, dass in der Computergrafik die Y-Achse nach <b>unten</b> zunimmt – je größer der Y-Wert, desto tiefer befindet sich das Objekt im Fenster.
