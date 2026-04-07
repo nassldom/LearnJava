@@ -42,31 +42,17 @@ String[] namen = new String[3];
 namen[0] = "Alice";
 [/CODE]
 
-<b>5. Lineare Suche (Kapitel 66)</b>
-Um ein Element in einem unsortierten Array zu finden, prüft man jedes Element nacheinander.
-[CODE]
-int gesucht = 50;
-for (int i = 0; i < zahlen.length; i++) {
-    if (zahlen[i] == gesucht) {
-        System.out.println("Gefunden an Index: " + i);
-    }
-}
-[/CODE]
+<b>5. Lineare Suche & 2D-Arrays (Kapitel 66-67)</b>
+- <b>Lineare Suche:</b> Prüft jedes Element nacheinander, bis der gesuchte Wert gefunden wird.
+- <b>Zweidimensionale Arrays:</b> Wie eine Tabelle mit Zeilen und Spalten: <code>int[][] matrix = new int[3][3];</code>.
 
-<b>6. Zweidimensionale Arrays (Kapitel 67)</b>
-Man kann sich 2D-Arrays wie eine Tabelle mit Zeilen und Spalten vorstellen.
+<b>6. StringBuffers (Kapitel 68)</b>
+Im Gegensatz zu normalen Strings sind <code>StringBuffer</code> veränderbar. Das ist effizienter, wenn man Text in einer Schleife oft ändern muss.
 [CODE]
-int[][] tabelle = new int[3][4]; // 3 Zeilen, 4 Spalten
-tabelle[0][0] = 1;
-[/CODE]
-
-<b>7. StringBuffer (Kapitel 68)</b>
-Ein <code>StringBuffer</code> ist wie ein veränderbarer String. Er ist effizienter, wenn man einen Text oft bearbeiten oder verlängern muss.
-[CODE]
-StringBuffer sb = new StringBuffer("Hallo");
-sb.append(" Welt");
-System.out.println(sb.toString());
+StringBuffer sb = new StringBuffer(\"Start\");
+sb.append(\" Ende\");
+System.out.println(sb.toString()); // \"Start Ende\"
 [/CODE]
 
 <b>Merksatz:</b>
-Arrays haben eine feste Größe. Musst du oft Elemente hinzufügen oder löschen, sind andere Strukturen (wie <code>ArrayList</code>) besser geeignet.
+Arrays haben eine feste Größe. Wenn du flexiblere Listen brauchst, sind ArrayLists (Part 9) besser geeignet. Denke bei Objekten im Array immer daran, dass diese initialisiert werden müssen (Vermeidung von <code>NullPointerException</code>).
