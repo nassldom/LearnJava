@@ -1,61 +1,40 @@
-PART 13 – JavaFX Grafik
-(Kap. 120–121)
+<b>Part 13: JavaFX Grafik (Kapitel 120-121)</b>
 
-Grundstruktur:
+In diesem Teil lernst du die Grundlagen der grafischen Oberflächen mit JavaFX kennen, wie man Fenster erstellt und einfache Formen zeichnet.
+
+<b>1. Grundstruktur einer JavaFX-App (Kapitel 120)</b>
+Jede JavaFX-Anwendung erbt von <code>Application</code> und überschreibt die <code>start()</code>-Methode.
+- <code>Stage:</code> Das Hauptfenster (die "Bühne").
+- <code>Scene:</code> Der Inhalt des Fensters (die "Szene").
+- <code>Root Node:</code> Ein Container (z.B. <code>Group</code>), der alle grafischen Elemente enthält.
 [CODE]
-public class MeinProgramm extends Application {
-    public void start(Stage primaryStage) {
-        Circle kreis = new Circle(100, 100, 50);
-        kreis.setFill(Color.BLUE);
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.Group;
+import javafx.scene.shape.Circle;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
-        Group root  = new Group(kreis);
+public class JavaFXApp extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        Circle circle = new Circle(100, 100, 50, Color.BLUE);
+        Group root = new Group(circle);
         Scene scene = new Scene(root, 400, 300);
+        
+        primaryStage.setTitle("Meine Grafik");
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-    public static void main(String[] args) {
-        launch(args);
     }
 }
 [/CODE]
 
-Formen:
-[CODE]
-Circle     c = new Circle(cx, cy, radius);
-Rectangle  r = new Rectangle(x, y, width, height);
-Ellipse    e = new Ellipse(cx, cy, rx, ry);
-Line       l = new Line(x1, y1, x2, y2);
-Polygon    p = new Polygon(x1,y1, x2,y2, x3,y3);
-Arc        a = new Arc(cx, cy, rx, ry, start, length);
-Text       t = new Text(x, y, "Hallo");
-[/CODE]
+<b>2. Grafische Primitiven und Koordinaten (Kapitel 121)</b>
+JavaFX nutzt ein Koordinatensystem, bei dem der Ursprung <code>(0,0)</code> in der **oberen linken Ecke** liegt.
+- <code>Circle(cx, cy, r):</code> Kreis mit Mittelpunkt und Radius.
+- <code>Rectangle(x, y, w, h):</code> Rechteck mit Startpunkt (links oben), Breite und Höhe.
+- <code>Line(x1, y1, x2, y2):</code> Linie zwischen zwei Punkten.
+- <code>Farben:</code> Mit <code>setFill()</code> (Füllung) und <code>setStroke()</code> (Rand) anpassbar.
 
-Farben:
-[CODE]
-shape.setFill(Color.RED);
-shape.setStroke(Color.BLACK);
-shape.setStrokeWidth(2.0);
-Color.rgb(255, 128, 0)  // orange
-Color.TRANSPARENT       // durchsichtig
-[/CODE]
-
-Transformationen:
-[CODE]
-shape.setRotate(45);      // 45° drehen
-shape.setTranslateX(100); // nach rechts verschieben
-shape.setScaleX(2.0);     // horizontal skalieren
-[/CODE]
-
-Koordinatensystem:
-• Ursprung (0,0) ist oben links
-• X wächst nach rechts
-• Y wächst nach unten
-
-Layout-Panes:
-• Group    – freie Positionierung per Koordinaten
-• StackPane – Elemente übereinander stapeln
-• HBox     – Elemente nebeneinander
-• VBox     – Elemente untereinander
-
-Dateien: TestFX.java, CircleScene.java, Pacman.java,
-         OneStar.java, JumpingJack.java, DrawBarBell.java
+<b>Merksatz:</b>
+Denke daran, dass in der Computergrafik die Y-Achse nach **unten** zunimmt – je größer der Y-Wert, desto tiefer befindet sich das Objekt im Fenster.
